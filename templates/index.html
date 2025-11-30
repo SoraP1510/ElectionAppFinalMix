@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบเลือกตั้ง - ธีมดาราศาสตร์ (Dark Theme)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global & Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Prompt', sans-serif;
+            color: #e0e0e0; /* Light text on dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; 
+            background: #121212; /* Deep dark background */
+        }
+
+        /* --- Star Particle Background --- */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .stars::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* สร้างดาวโดยใช้ box-shadow */
+            box-shadow: 
+                /* ตัวอย่างดาว 50 จุด */
+                100px 30px #fff, 200px 70px #fff, 350px 10px #fff, 450px 50px #fff, 600px 80px #fff,
+                700px 20px #fff, 850px 60px #fff, 950px 30px #fff, 1100px 90px #fff, 1250px 40px #fff,
+                /* เพิ่มดาวเพื่อกระจายทั่วจอ */
+                50px 150px #fff, 150px 220px #fff, 300px 180px #fff, 400px 250px #fff, 550px 210px #fff,
+                650px 280px #fff, 800px 240px #fff, 900px 310px #fff, 1050px 270px #fff, 1200px 330px #fff,
+                /* ดาวบริเวณด้านล่าง */
+                120px 450px #fff, 280px 520px #fff, 450px 480px #fff, 620px 550px #fff, 780px 510px #fff,
+                950px 580px #fff, 1100px 540px #fff, 1250px 610px #fff, 1400px 570px #fff, 1550px 630px #fff,
+                /* เพิ่มการกระจาย */
+                100px 750px #fff, 200px 820px #fff, 350px 780px #fff, 450px 850px #fff, 600px 810px #fff,
+                700px 880px #fff, 850px 840px #fff, 950px 910px #fff, 1100px 870px #fff, 1250px 930px #fff;
+            
+            background: transparent;
+            /* กำหนดขนาดของดาว */
+            width: 1px;
+            height: 1px;
+            /* ทำให้ดาวเคลื่อนไหวช้าๆ */
+            animation: starTwinkle 15s linear infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-50px); opacity: 0.8; }
+        }
+
+        /* Main Card Container - The Split Card */
+        .main-card {
+            background: #1a1a2e; /* Slightly lighter dark blue for the card */
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); /* Shadow for contrast */
+            width: 90%;
+            max-width: 950px; 
+            display: flex;
+            overflow: hidden;
+            min-height: 550px;
+            position: relative;
+            z-index: 10; /* Bring card to front */
+        }
+        
+        /* --- Left Panel: Camera/Visual --- */
+        .left-panel {
+            flex: 1.2;
+            background: #1a1a2e; /* Keep the card color */
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+        }
+        
+        .left-panel h1 {
+            font-weight: 700;
+            font-size: 28px;
+            color: #80c0ff; /* Light blue accent */
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .video-box {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 4/3;
+            background-color: #2c3e50; /* Darker placeholder */
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid #ff7f50; /* Orange/Coral accent */
+        }
+        
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+            display: block;
+        }
+
+        .camera-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            color: #bbbbbb;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- Right Panel: Form/Actions --- */
+        .right-panel {
+            flex: 1;
+            background: #232340; /* Even darker blue for a subtle contrast */
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #e0e0e0;
+        }
+
+        .right-panel h2 {
+            font-weight: 700;
+            color: #80c0ff;
+            margin-bottom: 25px;
+            font-size: 24px;
+            text-align: left;
+        }
+
+        /* Input Field */
+        input {
+            width: 100%;
+            padding: 15px 18px;
+            margin-bottom: 25px;
+            border: 1px solid #4a4a6e; /* Darker border */
+            background: #1a1a2e; /* Dark input background */
+            color: #ffffff;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input::placeholder {
+            color: #999999;
+        }
+        input:focus {
+            border-color: #80c0ff;
+            outline: none;
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #80c0ff; /* Primary Blue Accent */
+            color: #1a1a2e; /* Dark text on light button */
+            box-shadow: 0 4px 10px rgba(128, 192, 255, 0.3);
+        }
+        .btn-primary:hover {
+            background: #5a9fff;
+        }
+
+        .btn-secondary {
+            background: #4a4a6e; /* Darker secondary button */
+            color: #ffffff;
+            margin-top: 15px;
+        }
+        .btn-secondary:hover {
+            background: #606080;
+        }
+
+        /* Error Message */
+        .error {
+            color: #ff7f50; /* Orange/Coral for errors */
+            margin-top: 20px;
+            font-weight: 500;
+            min-height: 20px;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        /* Admin Link */
+        .admin-link {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #999999;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .admin-link:hover {
+            color: #80c0ff;
+        }
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 800px) {
+            .main-card {
+                flex-direction: column;
+                min-height: auto;
+                width: 95%;
+            }
+            .left-panel {
+                padding: 30px;
+                order: 2;
+            }
+            .right-panel {
+                padding: 30px;
+                order: 1;
+            }
+            .video-box {
+                max-width: 100%;
+            }
+            .right-panel h2, .admin-link, .error {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="stars"></div>
+
+    <div class="main-card">
+        <div class="left-panel">
+            <div>
+                <h1>ระบบเลือกตั้งประธานนักเรียน</h1>
+                <p>โปรดยืนยันตัวตนด้วยรหัสนักเรียนและใบหน้า</p> 
+            </div>
+            
+            <div class="video-box">
+                <video id="video" autoplay></video>
+                <div id="camera-overlay" class="camera-overlay">
+                    กำลังรอการอนุญาตเข้าถึงกล้อง...
+                </div>
+            </div>
+            
+            <p style="font-size: 14px; color: #bbbbbb;">ความปลอดภัยสูงด้วย Face Recognition</p>
+        </div>
+        
+        <div class="right-panel">
+            <h2>เข้าสู่ระบบผู้มีสิทธิ์เลือกตั้ง</h2>
+            
+            <input type="text" id="studentid" placeholder="กรอกรหัสนักเรียนที่ลงทะเบียน" required>
+            
+            <button class="btn-primary" onclick="capture()">
+                📸 กดถ่ายภาพ & ยืนยันตัวตน
+            </button>
+            <button class="btn-secondary" onclick="location.href='/register'">
+                📝 ลงทะเบียนใหม่
+            </button>
+            
+            <p class="error" id="error-msg">
+                {% if msg == 'registered' %}
+                    ✅ ลงทะเบียนสำเร็จแล้ว! กรุณาเข้าสู่ระบบ
+                {% else %}
+                    {{ result }} 
+                {% endif %}
+            </p>
+            <canvas id="canvas" style="display: none;"></canvas>
+            
+            <a href="/admin" class="admin-link">Admin Login</a>
+        </div>
+    </div>
+    
+    <script>
+        const video = document.getElementById('video');
+        const errorMsg = document.getElementById('error-msg');
+        const cameraOverlay = document.getElementById('camera-overlay');
+        // แก้ไข: ใช้ studentidInput แทน studentCodeInput
+        const studentidInput = document.getElementById('studentid');
+        
+        // --- 1. Initialize Camera ---
+        function initializeCamera() {
+            cameraOverlay.innerText = "กำลังรอการอนุญาตเข้าถึงกล้อง...";
+            video.style.opacity = 0;
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        cameraOverlay.style.display = 'none';
+                        video.style.opacity = 1; 
+                    };
+                })
+                .catch(err => { 
+                    errorMsg.innerText = "❌ ไม่สามารถเปิดกล้องได้: โปรดอนุญาตการใช้เว็บแคม";
+                    cameraOverlay.innerText = "ไม่สามารถเข้าถึงกล้องได้\nโปรดอนุญาตการใช้เว็บแคม";
+                    cameraOverlay.style.display = 'flex';
+                    video.style.opacity = 0;
+                });
+        }
+        
+        initializeCamera();
+
+        // --- 2. Capture Function ---
+        window.capture = function() {
+            // แก้ไข: ใช้ studentid แทน studentCode
+            const studentid = studentidInput.value.trim();
+            
+            if (!studentid) { 
+                errorMsg.innerText = "⚠️ กรุณากรอกเบอร์โทรศัพท์ที่ลงทะเบียน"; 
+                return; 
+            }
+            
+            if (video.readyState < 2 || video.paused || video.ended || video.style.opacity === "0") {
+                errorMsg.innerText = "⚠️ กล้องยังไม่พร้อมใช้งาน หรือยังไม่ได้รับอนุญาต";
+                return;
+            }
+
+            errorMsg.innerText = "⏳ กำลังตรวจสอบ...";
+            const canvas = document.getElementById('canvas');
+            canvas.width = video.videoWidth; 
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height); 
+
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                // แก้ไข: ส่ง studentid ไปยังเซิร์ฟเวอร์
+                formData.append('studentid', studentid);
+                formData.append('image', blob, 'face.png');
+
+                fetch('/', { method: 'POST', body: formData })
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().catch(() => {
+                                throw new Error('Server responded with status: ' + res.status);
+                            });
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            errorMsg.innerText = "❌ " + (data.message || "เกิดข้อผิดพลาดในการตรวจสอบ");
+                        }
+                    })
+                    .catch(err => { 
+                        errorMsg.innerText = "🔥 ข้อผิดพลาด: " + err.message; 
+                    });
+            }, 'image/png');
+        }
+    </script>
+</body>
+</html>

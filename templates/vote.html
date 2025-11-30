@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗳️ คูหาเลือกตั้งออนไลน์</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global & Body Styles (Dark Theme) */
+        body {
+            margin: 0;
+            font-family: 'Prompt', sans-serif;
+            color: #e0e0e0; 
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* จัดให้อยู่ด้านบนหน่อย */
+            min-height: 100vh;
+            overflow-x: hidden; 
+            background: #121212; /* Deep dark background */
+            padding-top: 50px;
+        }
+
+        /* --- Star Particle Background (ชุดเดียวกับหน้าอื่น) --- */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .stars::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-shadow: 
+                100px 30px #fff, 200px 70px #fff, 350px 10px #fff, 450px 50px #fff, 600px 80px #fff,
+                700px 20px #fff, 850px 60px #fff, 950px 30px #fff, 1100px 90px #fff, 1250px 40px #fff,
+                50px 150px #fff, 150px 220px #fff, 300px 180px #fff, 400px 250px #fff, 550px 210px #fff,
+                650px 280px #fff, 800px 240px #fff, 900px 310px #fff, 1050px 270px #fff, 1200px 330px #fff,
+                120px 450px #fff, 280px 520px #fff, 450px 480px #fff, 620px 550px #fff, 780px 510px #fff,
+                950px 580px #fff, 1100px 540px #fff, 1250px 610px #fff, 1400px 570px #fff, 1550px 630px #fff,
+                100px 750px #fff, 200px 820px #fff, 350px 780px #fff, 450px 850px #fff, 600px 810px #fff,
+                700px 880px #fff, 850px 840px #fff, 950px 910px #fff, 1100px 870px #fff, 1250px 930px #fff;
+            
+            background: transparent;
+            width: 1px;
+            height: 1px;
+            animation: starTwinkle 15s linear infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-50px); opacity: 0.8; }
+        }
+
+        /* Main Content Card (เหมือน main-card) */
+        .main-card {
+            background: #1a1a2e; /* Card color */
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 1200px; /* ขยายกว้างขึ้นสำหรับบัตรหลายใบ */
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 40px;
+            text-align: left;
+            border-bottom: 2px solid #232340;
+            padding-bottom: 20px;
+        }
+
+        .header h2 {
+            font-weight: 700;
+            color: #80c0ff;
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #bbbbbb;
+        }
+
+        /* Card Container */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* ปรับให้ยืดหยุ่น */
+            gap: 25px;
+            justify-content: center;
+        }
+
+        /* Individual Card (บัตรลงคะแนน) */
+        .card {
+            background: #232340; /* Dark blue card */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent; /* เตรียมไว้สำหรับ hover */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff7f50; /* Orange/Coral accent on hover */
+            box-shadow: 0 12px 25px rgba(255, 127, 80, 0.2);
+        }
+
+        /* หมายเลขผู้สมัคร */
+        .number {
+            height: 80px;
+            width: 80px;
+            background: #ff7f50; /* Coral Orange */
+            border-radius: 50%; /* กลม */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e; /* Dark text on orange */
+            margin: 0 auto 20px auto; /* จัดกลาง */
+            border: 4px solid #ffffff1a; /* ขอบเรืองแสงจางๆ */
+        }
+
+        .card h3 {
+            color: #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* ปุ่มโหวต */
+        .btn-vote {
+            background-color: #2ecc71; /* Green for Vote */
+            color: #1a1a2e;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-vote:hover {
+            background-color: #27ae60;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-card {
+                padding: 30px;
+            }
+            .header {
+                text-align: center;
+            }
+            .card-container {
+                grid-template-columns: 1fr; /* ให้แสดงเป็นคอลัมน์เดียวในมือถือ */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+
+    <div class="main-card">
+        <div class="header">
+            <h2>🗳️ บัตรเลือกตั้งพรรค</h2>
+            <p>สวัสดีคุณ <b>{{ name }} {{ surname }} {{ studentid }}</b> | สถานะ: <span style="color:#2ecc71; font-weight:600;">ยืนยันตัวตนสำเร็จแล้ว</span></p>
+        </div>
+        <div class="card-container">
+            {% for cand in candidates %}
+            <div class="card">
+                <div class="number">{{ cand.candidate_id }}</div>
+                <h3>{{ cand.candidate_name }}</h3>
+                
+                <form action="/submit_vote" method="POST"
+                    onsubmit="return confirm('คุณยืนยันจะลงคะแนนให้ {{ cand.candidate_name }} (หมายเลข {{ cand.candidate_id }}) ใช่หรือไม่? การโหวตทำได้เพียงครั้งเดียว');">
+                    
+                    <input type="hidden" name="candidate_id" value="{{ cand.candidate_id }}">
+                    
+                    <button type="submit" class="btn-vote">
+                        ✅ เลือกพรรคนี้
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

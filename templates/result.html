@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 ผลคะแนนการเลือกตั้ง (Real-time)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global & Body Styles (Dark Theme) */
+        body {
+            margin: 0;
+            font-family: 'Prompt', sans-serif;
+            color: #e0e0e0; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; 
+            background: #121212; /* Deep dark background */
+            padding: 40px 20px;
+        }
+
+        /* --- Star Particle Background (ชุดเดียวกับหน้าอื่น) --- */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .stars::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-shadow: 
+                100px 30px #fff, 200px 70px #fff, 350px 10px #fff, 450px 50px #fff, 600px 80px #fff,
+                700px 20px #fff, 850px 60px #fff, 950px 30px #fff, 1100px 90px #fff, 1250px 40px #fff,
+                50px 150px #fff, 150px 220px #fff, 300px 180px #fff, 400px 250px #fff, 550px 210px #fff,
+                650px 280px #fff, 800px 240px #fff, 900px 310px #fff, 1050px 270px #fff, 1200px 330px #fff,
+                120px 450px #fff, 280px 520px #fff, 450px 480px #fff, 620px 550px #fff, 780px 510px #fff,
+                950px 580px #fff, 1100px 540px #fff, 1250px 610px #fff, 1400px 570px #fff, 1550px 630px #fff,
+                100px 750px #fff, 200px 820px #fff, 350px 780px #fff, 450px 850px #fff, 600px 810px #fff,
+                700px 880px #fff, 850px 840px #fff, 950px 910px #fff, 1100px 870px #fff, 1250px 930px #fff;
+            
+            background: transparent;
+            width: 1px;
+            height: 1px;
+            animation: starTwinkle 15s linear infinite;
+        }
+
+        @keyframes starTwinkle {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-50px); opacity: 0.8; }
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #ff7f50; /* Coral Orange accent */
+            margin-bottom: 5px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #bbbbbb;
+            margin-bottom: 30px;
+        }
+
+        /* Table Container (Card effect) */
+        .table-container {
+            width: 90%;
+            max-width: 850px;
+            background: #1a1a2e; /* Card color */
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        th, td {
+            padding: 18px 25px;
+            text-align: left;
+            border-bottom: 1px solid #4a4a6e; /* Darker border */
+        }
+
+        th {
+            background-color: #232340; /* Dark blue header */
+            color: #80c0ff; /* Light blue accent for headers */
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        /* Row Styling */
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1a1a2e; /* สีเข้มกว่า */
+        }
+        tr:nth-child(odd) {
+            background-color: #232340; /* สีสว่างกว่านิดนึง */
+        }
+
+        /* Score emphasis */
+        .score {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2ecc71; /* Green for score/success */
+            text-align: right;
+            padding-right: 25px;
+        }
+
+        /* Winner Row (Optional: Highlight the candidate with the highest score) */
+        /* Note: ต้องใช้ JS หรือ Logic ใน Flask ในการกำหนด class 'winner' */
+        .winner td {
+            background-color: #2ecc7133; /* Green transparent background */
+            color: #e0e0e0;
+            font-weight: 700;
+        }
+
+        /* Home Button */
+        .btn-home {
+            margin-top: 40px;
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 30px;
+            background: #80c0ff; /* Primary Blue Accent */
+            color: #1a1a2e;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 4px 10px rgba(128, 192, 255, 0.3);
+        }
+        .btn-home:hover {
+            background: #5a9fff;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            th, td { padding: 15px; font-size: 14px; }
+            .score { font-size: 20px; }
+            .table-container { width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+
+    <h1>📊 ผลคะแนนแบบ Real-time</h1>
+    <p class="subtitle">ขอบคุณที่ใช้สิทธิ์เลือกตั้ง</p>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>เบอร์</th>
+                <th>ชื่อผู้สมัคร</th>
+                <th style="text-align: right; padding-right: 25px;">คะแนนเสียง</th>
+            </tr>
+            {% for row in rows %}
+            <tr {% if loop.index == 1 and rows|length > 0 %}class="winner"{% endif %}>
+                <td>{{ row.candidate_id }}</td>
+                <td>{{ row.candidate_name }}</td>
+                <td class="score">{{ row.vote_count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <a href="/" class="btn-home">กลับหน้าหลัก</a>
+</body>
+
+</html>
