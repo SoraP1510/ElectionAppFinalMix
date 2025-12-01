@@ -5,17 +5,14 @@ import json
 from pyngrok import ngrok
 import tensorflow as tf
 import shutil
-import random
 import cv2
 import os
-import time
 from dotenv import load_dotenv
 import base64
 from flask import Flask, request, render_template, make_response, redirect, url_for, send_from_directory, session, jsonify
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-
 
 # CONFIGURATION
 load_dotenv()
@@ -222,7 +219,7 @@ def register_post():
 
         df = pd.read_csv(csv_file, dtype={'studentid': str})
         if studentid in df['studentid'].values:
-            return jsonify({'status': 'error', 'message': "เบอร์โทรศัพท์นี้ลงทะเบียนไปแล้ว"}), 400
+            return jsonify({'status': 'error', 'message': "รหัสนักเรียนนี้นี้ลงทะเบียนไปแล้ว"}), 400
 
         user_folder = f"{name}_{surname}".replace(" ", "_")
         save_path = os.path.join(user_img_dir, user_folder)
@@ -241,7 +238,7 @@ def register_post():
                     
                     # 2. ถ้าหาหน้าไม่เจอ ให้ใช้รูปเต็มแทน (Fallback)
                     if face_roi is None:
-                        # print(f"⚠️ รูปที่ {i+1} ไม่เจอกรอบหน้า -> บันทึกรูปเต็มแทน")
+                        # print(f" รูปที่ {i+1} ไม่เจอกรอบหน้า -> บันทึกรูปเต็มแทน")
                         try:
                             face_roi = cv2.resize(img, (100, 100))
                         except:
@@ -331,7 +328,7 @@ def register_post():
             model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
             
             # ฝึกโมเดลด้วยชุดข้อมูลฝึก: 15 รอบ (epochs) โดยแบ่งกลุ่มย่อย (batch_size) 16 รูป
-            model.fit(trainX, trainY, epochs=15, batch_size=16, verbose=1)
+            model.fit(trainX, trainY, epochs=30, batch_size=8, verbose=1)
             
             # [STEP 5: บันทึกโมเดล]
             model_dir = f'{base_path}/model'
@@ -382,7 +379,7 @@ def index():
             user_row = users_df[users_df['studentid'] == studentid]
 
             if user_row.empty:
-                return jsonify({'status': 'error', 'message': f"ไม่พบเบอร์โทร {studentid} ในระบบ"})
+                return jsonify({'status': 'error', 'message': f"ไม่พบรหัสนักเรียน {studentid} ในระบบ"})
 
             expected_folder = os.path.basename(user_row.iloc[0]['folder'])
             

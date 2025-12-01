@@ -1,7 +1,11 @@
 name,surname,studentid,folder,has_voted
+บวรวิชญ์,วงศ์อินทร์อยู่,6601359,./Face_Recog_App/static/uploads/UserImages\บวรวิชญ์_วงศ์อินทร์อยู่,0
 Non,N,1111111111,./Face_Recog_App/static/uploads/UserImages\Non_N,0
 Bom,Bom,123456,./Face_Recog_App/static/uploads/UserImages\Bom_Bom,0
-aaa,sss,5555,./Face_Recog_App/static/uploads/UserImages\aaa_sss,0
-สรยุทธ์,ดีมาก,0,./Face_Recog_App/static/uploads/UserImages\สรยุทธ์_ดีมาก,0
-ออม,พล,1111,./Face_Recog_App/static/uploads/UserImages\ออม_พล,0
-พุฒิธร,ตรีสัตย์,6601778,./Face_Recog_App/static/uploads/UserImages\พุฒิธร_ตรีสัตย์,1
+s,sss,5555,./Face_Recog_App/static/uploads/UserImages/aaa_sss,0
+พุฒิธร ,ตรีสัตย์,6601778,./Face_Recog_App/static/uploads/UserImages\พุฒิธร__ตรีสัตย์,0
+ออมพล,โคตรสุโน,6600685,./Face_Recog_App/static/uploads/UserImages\ออมพล_โคตรสุโน,0
+ชวกร,ทุมมา,6601398,./Face_Recog_App/static/uploads/UserImages\ชวกร_ทุมมา,0
+พริษฐ์,ผิวงาม,6601935,./Face_Recog_App/static/uploads/UserImages\พริษฐ์_ผิวงาม,0
+ปภังกร,ธรรมสุขสรรค์,6602024,./Face_Recog_App/static/uploads/UserImages\ปภังกร_ธรรมสุขสรรค์,0
+สรยุทธ์,ดีมาก,6601401,./Face_Recog_App/static/uploads/UserImages\สรยุทธ์_ดีมาก,1
