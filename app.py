@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 import base64
 from flask import Flask, request, render_template, make_response, redirect, url_for, send_from_directory, session, jsonify
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
 # CONFIGURATION
 load_dotenv()
@@ -24,7 +24,7 @@ csv_file = f'{user_img_dir}/users.csv'
 vote_file = f'{user_img_dir}/votes.csv' 
 
 # รหัสผ่านสำหรับเข้า Admin Zone
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
+ADMIN_PASSWORD = "1234"
 
 # โหลด Haar Cascade
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -38,7 +38,7 @@ if not os.path.exists(vote_file):
     df_votes.to_csv(vote_file, index=False)
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = "2z7dny9VHttyHgA2yffzSjJVTmc_89ZSUD7CNsQGJDTi6tvER"
 
 # HELPER FUNCTIONS
 
