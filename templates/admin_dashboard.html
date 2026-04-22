@@ -107,6 +107,26 @@
             cursor: not-allowed;
         }
 
+        .btn-train {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .btn-train:hover {
+            background: #6c3483;
+        }
+
+        .btn-train:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+
         .logout {
             float: right;
             color: red;
@@ -173,11 +193,29 @@
         <hr>
         <h3>🖼️ จัดการรูปภาพ</h3>
         <div id="normalize-message" class="message"></div>
-        <button type="button" class="btn-normalize" onclick="normalizeImages()">
+        <button id="normalize-btn" type="button" class="btn-normalize" onclick="normalizeImages()">
             🔄 Normalize รูปภาพเก่าทั้งหมด
         </button>
         <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
             ปรับปรุงรูปภาพเก่าทั้งหมดให้สอดคล้องกับระบบใหม่ (ลดผลกระทบจากกล้องต่างกัน)
+        </p>
+
+        <hr>
+        <h3>🧠 เทรนโมเดล</h3>
+        <div id="train-message" class="message"></div>
+        {% if train_message %}
+        <div class="message {{ 'success' if train_status == 'success' else 'error' }}" style="display: block;">
+            {{ '✅' if train_status == 'success' else '❌' }} {{ train_message }}
+        </div>
+        {% endif %}
+        <button id="train-btn" type="button" class="btn-train" onclick="retrainModel()">
+            🚀 Train Model Now
+        </button>
+        <form action="/admin/retrain_model_sync" method="POST" style="margin-top: 10px;">
+            <button type="submit" class="btn-train">🛠️ Train Model (Fallback)</button>
+        </form>
+        <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
+            เทรนโมเดลใหม่จากรูปผู้ใช้ทั้งหมด แล้วแสดงค่า accuracy หลังเทรนเสร็จ
         </p>
 
         <hr>
@@ -193,7 +231,7 @@
 
         <script>
             function normalizeImages() {
-                const btn = event.target;
+                const btn = document.getElementById('normalize-btn');
                 const messageDiv = document.getElementById('normalize-message');
                 
                 if (!confirm('ยืนยันที่จะ normalize รูปภาพเก่าทั้งหมด?\n\nหมายเหตุ: กระบวนการนี้อาจใช้เวลาสักครู่')) {
@@ -230,6 +268,47 @@
                 .finally(() => {
                     btn.disabled = false;
                     btn.textContent = '🔄 Normalize รูปภาพเก่าทั้งหมด';
+                });
+            }
+
+            function retrainModel() {
+                const btn = document.getElementById('train-btn');
+                const messageDiv = document.getElementById('train-message');
+
+                if (!confirm('ยืนยันที่จะเทรนโมเดลใหม่จากข้อมูลทั้งหมด?\n\nหมายเหตุ: อาจใช้เวลาสักครู่')) {
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = '⏳ กำลังเทรนโมเดล...';
+                messageDiv.style.display = 'none';
+
+                fetch('/admin/retrain_model', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        messageDiv.className = 'message success';
+                        messageDiv.textContent = `✅ ${data.message} (Accuracy: ${data.accuracy_percent})`;
+                        messageDiv.style.display = 'block';
+                    } else {
+                        messageDiv.className = 'message error';
+                        messageDiv.textContent = `❌ ${data.message}`;
+                        messageDiv.style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    messageDiv.className = 'message error';
+                    messageDiv.textContent = `❌ เกิดข้อผิดพลาด: ${error.message}`;
+                    messageDiv.style.display = 'block';
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                    btn.textContent = '🚀 Train Model Now';
                 });
             }
         </script>

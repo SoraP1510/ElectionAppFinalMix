@@ -7,12 +7,18 @@ import tensorflow as tf
 import shutil
 import cv2
 import os
+import tempfile
+from datetime import datetime
 from dotenv import load_dotenv
 import base64
 from flask import Flask, request, render_template, make_response, redirect, url_for, send_from_directory, session, jsonify
 from sklearn.model_selection import train_test_split
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+try:
+    from ultralytics import YOLO
+except ImportError:
+    YOLO = None
 
 # CONFIGURATION
 load_dotenv()
@@ -22,12 +28,26 @@ os.makedirs(user_img_dir, exist_ok=True)
 
 csv_file = f'{user_img_dir}/users.csv'
 vote_file = f'{user_img_dir}/votes.csv' 
+train_log_file = f'{base_path}/model/train.log'
 
 # รหัสผ่านสำหรับเข้า Admin Zone
 ADMIN_PASSWORD = "1234"
 
 # โหลด Haar Cascade
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+yolo_model = None
+YOLO_FACE_MODEL_PATH = os.getenv("YOLO_FACE_MODEL_PATH", f"{base_path}/model/yolov8n-face.pt")
+
+if YOLO is not None and os.path.exists(YOLO_FACE_MODEL_PATH):
+    try:
+        yolo_model = YOLO(YOLO_FACE_MODEL_PATH)
+        print(f"✅ YOLO face model loaded: {YOLO_FACE_MODEL_PATH}")
+    except Exception as e:
+        print(f"⚠️ YOLO model load failed, fallback to Haar: {e}")
+elif YOLO is None:
+    print("ℹ️ ultralytics not installed, using Haar Cascade.")
+else:
+    print(f"ℹ️ YOLO model not found at {YOLO_FACE_MODEL_PATH}, using Haar Cascade.")
 
 if not os.path.exists(csv_file):
     df = pd.DataFrame(columns=['name', 'surname', 'studentid', 'folder', 'has_voted'])
@@ -41,6 +61,17 @@ app = Flask(__name__)
 app.secret_key = "2z7dny9VHttyHgA2yffzSjJVTmc_89ZSUD7CNsQGJDTi6tvER"
 
 # HELPER FUNCTIONS
+
+def write_train_log(message):
+    os.makedirs(os.path.dirname(train_log_file), exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(train_log_file, "a", encoding="utf-8") as f:
+        f.write(f"[{timestamp}] {message}\n")
+
+@app.before_request
+def log_request_path():
+    # ช่วย debug ว่า request เข้า route ไหนจริง
+    print(f"🌐 {request.method} {request.path}", flush=True)
 
 def cv2_imread_utf8(path):
     try:
@@ -153,9 +184,36 @@ def normalize_image_for_camera_variation(img):
     
     return normalized
 
-def detect_and_crop_face(image_array):
+def detect_faces(image_array):
+    """
+    ตรวจจับใบหน้าโดยใช้ YOLO ก่อน (ถ้ามี), แล้ว fallback ไป Haar Cascade
+    คืนค่าเป็น list ของ (x, y, w, h)
+    """
+    h_img, w_img = image_array.shape[:2]
+
+    if yolo_model is not None:
+        try:
+            results = yolo_model(image_array, verbose=False)
+            boxes = []
+            for result in results:
+                for box in result.boxes:
+                    x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
+                    x = max(0, x1)
+                    y = max(0, y1)
+                    w = min(w_img - x, max(0, x2 - x1))
+                    h = min(h_img - y, max(0, y2 - y1))
+                    if w > 0 and h > 0:
+                        boxes.append((x, y, w, h))
+            if boxes:
+                return boxes
+        except Exception as e:
+            print(f"⚠️ YOLO detect failed, fallback to Haar: {e}")
+
     gray = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.1, 5)
+    return face_cascade.detectMultiScale(gray, 1.1, 5)
+
+def detect_and_crop_face(image_array):
+    faces = detect_faces(image_array)
     if len(faces) == 0: return None
     (x, y, w, h) = max(faces, key=lambda f: f[2] * f[3])
     face_roi = image_array[y:y+h, x:x+w]
@@ -202,6 +260,163 @@ def process_upload_to_cv2(file_storage):
     nparr = np.frombuffer(in_memory_file, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     return img
+
+class CompatibleInputLayer(tf.keras.layers.InputLayer):
+    """รองรับโมเดลเก่าที่ serialize ด้วย key ชื่อ batch_shape"""
+    def __init__(self, *args, **kwargs):
+        if "batch_shape" in kwargs and "batch_input_shape" not in kwargs:
+            kwargs["batch_input_shape"] = kwargs.pop("batch_shape")
+        super().__init__(*args, **kwargs)
+
+def load_face_model(model_path):
+    """
+    โหลดโมเดลแบบทนทานกับไฟล์ .keras เก่า/ใหม่
+    """
+    try:
+        return tf.keras.models.load_model(model_path, compile=False)
+    except Exception as first_error:
+        try:
+            return tf.keras.models.load_model(
+                model_path,
+                compile=False,
+                custom_objects={"InputLayer": CompatibleInputLayer},
+                safe_mode=False
+            )
+        except Exception as second_error:
+            # Fallback สุดท้าย: patch config.json ในไฟล์ .keras ชั่วคราว
+            try:
+                if model_path.endswith(".keras"):
+                    return load_face_model_with_patched_keras_config(model_path)
+            except Exception as third_error:
+                raise RuntimeError(
+                    f"โหลดโมเดลไม่สำเร็จ: {first_error} | fallback error: {second_error} | patch error: {third_error}"
+                ) from third_error
+
+            raise RuntimeError(
+                f"โหลดโมเดลไม่สำเร็จ: {first_error} | fallback error: {second_error}"
+            ) from second_error
+
+def _replace_batch_shape_key(obj):
+    if isinstance(obj, dict):
+        patched = {}
+        for key, value in obj.items():
+            new_key = "batch_input_shape" if key == "batch_shape" else key
+            patched[new_key] = _replace_batch_shape_key(value)
+        return patched
+    if isinstance(obj, list):
+        return [_replace_batch_shape_key(item) for item in obj]
+    return obj
+
+def load_face_model_with_patched_keras_config(model_path):
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        extract_dir = os.path.join(tmp_dir, "model_extract")
+        repack_path = os.path.join(tmp_dir, "patched_model.keras")
+        os.makedirs(extract_dir, exist_ok=True)
+
+        import zipfile
+        with zipfile.ZipFile(model_path, "r") as zf:
+            zf.extractall(extract_dir)
+
+        config_path = os.path.join(extract_dir, "config.json")
+        if not os.path.exists(config_path):
+            raise RuntimeError("ไม่พบ config.json ในไฟล์ .keras")
+
+        with open(config_path, "r", encoding="utf-8") as f:
+            config_data = json.load(f)
+
+        patched_config = _replace_batch_shape_key(config_data)
+
+        with open(config_path, "w", encoding="utf-8") as f:
+            json.dump(patched_config, f)
+
+        with zipfile.ZipFile(repack_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            for root, _, files in os.walk(extract_dir):
+                for file_name in files:
+                    full_path = os.path.join(root, file_name)
+                    arc_name = os.path.relpath(full_path, extract_dir).replace("\\", "/")
+                    zf.write(full_path, arc_name)
+
+        return tf.keras.models.load_model(repack_path, compile=False, safe_mode=False)
+
+class ConsoleTrainingLogger(tf.keras.callbacks.Callback):
+    """แสดงสถานะการเทรนใน console แบบอ่านง่าย"""
+    def on_train_begin(self, logs=None):
+        msg = "🚀 เริ่มเทรนโมเดล..."
+        print(msg, flush=True)
+        write_train_log(msg)
+
+    def on_epoch_end(self, epoch, logs=None):
+        logs = logs or {}
+        loss = logs.get("loss", 0.0)
+        acc = logs.get("accuracy", 0.0)
+        val_loss = logs.get("val_loss")
+        val_acc = logs.get("val_accuracy")
+        if val_loss is not None and val_acc is not None:
+            msg = (
+                f"  Epoch {epoch + 1:02d} | loss={loss:.4f} acc={acc:.4f} "
+                f"| val_loss={val_loss:.4f} val_acc={val_acc:.4f}"
+            )
+            print(msg, flush=True)
+            write_train_log(msg)
+        else:
+            msg = f"  Epoch {epoch + 1:02d} | loss={loss:.4f} acc={acc:.4f}"
+            print(msg, flush=True)
+            write_train_log(msg)
+
+    def on_train_end(self, logs=None):
+        msg = "✅ เทรนโมเดลเสร็จแล้ว"
+        print(msg, flush=True)
+        write_train_log(msg)
+
+def retrain_face_model_from_existing_images():
+    """
+    เทรนโมเดลใหม่จากรูปผู้ใช้ที่มีอยู่ เพื่อซ่อมกรณีไฟล์โมเดลเก่าโหลดไม่ได้
+    """
+    all_images, all_labels, label_map = load_data_rgb(user_img_dir)
+    if len(all_images) == 0:
+        return {"success": False, "message": "ไม่พบรูปภาพสำหรับเทรนโมเดลใหม่"}
+
+    num_classes = len(label_map)
+    if num_classes > 1:
+        trainX, testX, trainY, testY = train_test_split(
+            all_images, all_labels, test_size=0.3, stratify=all_labels, random_state=42
+        )
+    else:
+        trainX, trainY = all_images, all_labels
+        testX, testY = all_images, all_labels
+
+    model = Sequential([
+        tf.keras.Input(shape=(100, 100, 3)),
+        Conv2D(32, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
+        Conv2D(64, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
+        Conv2D(128, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
+        Flatten(),
+        Dense(128, activation='relu'), Dropout(0.5),
+        Dense(num_classes if num_classes > 1 else 2, activation='softmax')
+    ])
+
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.fit(
+        trainX,
+        trainY,
+        epochs=30,
+        batch_size=8,
+        verbose=2,
+        callbacks=[ConsoleTrainingLogger()]
+    )
+
+    model_dir = f'{base_path}/model'
+    os.makedirs(model_dir, exist_ok=True)
+    model.save(f'{model_dir}/face_cnn_model.keras')
+
+    with open(f'{model_dir}/label_map.json', 'w') as f:
+        json.dump(label_map, f)
+
+    loss, acc = model.evaluate(testX, testY, verbose=0)
+    result_msg = f"✅ Re-train complete. Accuracy: {acc:.4f} ({acc * 100:.2f}%)"
+    print(result_msg)
+    write_train_log(result_msg)
+    return {"success": True, "message": "retrain success", "accuracy": float(acc)}
 
 # FLASK ROUTES
 
@@ -254,8 +469,7 @@ def register_post():
                         if example_image_b64 is None:
                             debug_img = img.copy()
                             # Detect อีกครั้งเพื่อเอาพิกัดมาวาดรูป
-                            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                            faces = face_cascade.detectMultiScale(gray, 1.1, 5)
+                            faces = detect_faces(img)
                             
                             if len(faces) > 0:
                                 # ถ้าเจอหน้า วาดกรอบสีเขียว
@@ -282,6 +496,7 @@ def register_post():
         # ผลลัพธ์: all_images (รูปภาพ), all_labels (ID ผู้ใช้), label_map (ชื่อผู้ใช้ -> ID ตัวเลข)
         all_images, all_labels, label_map = load_data_rgb(user_img_dir)
         
+        training_accuracy = None
         # ตรวจสอบว่ามีรูปภาพในระบบหรือไม่ก่อนดำเนินการต่อ
         if len(all_images) > 0:
             # นับจำนวนคลาส (ID ผู้ใช้ที่แตกต่างกัน)
@@ -328,7 +543,14 @@ def register_post():
             model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
             
             # ฝึกโมเดลด้วยชุดข้อมูลฝึก: 15 รอบ (epochs) โดยแบ่งกลุ่มย่อย (batch_size) 16 รูป
-            model.fit(trainX, trainY, epochs=30, batch_size=8, verbose=1)
+            model.fit(
+                trainX,
+                trainY,
+                epochs=30,
+                batch_size=8,
+                verbose=2,
+                callbacks=[ConsoleTrainingLogger()]
+            )
             
             # [STEP 5: บันทึกโมเดล]
             model_dir = f'{base_path}/model'
@@ -340,11 +562,11 @@ def register_post():
                 json.dump(label_map, f)
                 
             print("💾 บันทึกโมเดลเรียบร้อยแล้ว")
+            loss, acc = model.evaluate(testX, testY, verbose=0)
+            training_accuracy = float(acc)
+            print(f"🎯 Training Accuracy: {acc:.4f} ({acc * 100:.2f}%)")
         else:
             print("❌ ไม่พบรูปภาพ")
-            
-        loss, acc = model.evaluate(testX, testY, verbose=0)
-        print(f" Accuracy: {acc:.2f}")
         
         target_url = url_for('index', msg='registered')
         
@@ -352,7 +574,8 @@ def register_post():
         return jsonify({
             'status': 'success', 
             'redirect_url': target_url, 
-            'example_image': example_image_b64
+            'example_image': example_image_b64,
+            'training_accuracy': training_accuracy
         })
     
     except Exception as e:
@@ -367,7 +590,17 @@ def index():
             if not os.path.exists(model_path):
                 return jsonify({'status': 'error', 'message': "ระบบยังไม่พร้อม (ยังไม่มีโมเดล)"})
                 
-            model = tf.keras.models.load_model(model_path)
+            try:
+                model = load_face_model(model_path)
+            except Exception as model_error:
+                print(f"⚠️ โหลดโมเดลเดิมไม่สำเร็จ, กำลัง re-train: {model_error}")
+                retrain_result = retrain_face_model_from_existing_images()
+                if not retrain_result.get("success"):
+                    return jsonify({
+                        'status': 'error',
+                        'message': f"โหลดโมเดลไม่สำเร็จ และเทรนใหม่ไม่ผ่าน: {retrain_result.get('message')}"
+                    })
+                model = load_face_model(model_path)
             with open(f'{base_path}/model/label_map.json', 'r') as f:
                 label_map = json.load(f)
             inv_label_map = {v: k for k, v in label_map.items()}
@@ -466,7 +699,14 @@ def admin_dashboard():
     if not session.get('is_admin'): return redirect(url_for('admin_login'))
     df = pd.read_csv(vote_file)
     candidates = df.to_dict('records')
-    return render_template('admin_dashboard.html', candidates=candidates)
+    train_status = request.args.get('train_status', '')
+    train_message = request.args.get('train_message', '')
+    return render_template(
+        'admin_dashboard.html',
+        candidates=candidates,
+        train_status=train_status,
+        train_message=train_message
+    )
 
 @app.route('/admin/add_candidate', methods=['POST'])
 def add_candidate():
@@ -508,6 +748,63 @@ def normalize_images():
             return jsonify({'status': 'error', 'message': result['message']}), 400
     except Exception as e:
         return jsonify({'status': 'error', 'message': f'เกิดข้อผิดพลาด: {str(e)}'}), 500
+
+@app.route('/admin/retrain_model', methods=['POST'])
+def retrain_model():
+    """Route สำหรับสั่งเทรนโมเดลใหม่ด้วยมือ (ต้องเป็น admin)"""
+    print("➡️ hit /admin/retrain_model", flush=True)
+    write_train_log("➡️ hit /admin/retrain_model")
+    if not session.get('is_admin'):
+        return jsonify({'status': 'error', 'message': 'ต้องเป็น admin'}), 403
+
+    try:
+        print("\n🧠 Admin requested model retraining...", flush=True)
+        write_train_log("🧠 Admin requested model retraining...")
+        result = retrain_face_model_from_existing_images()
+        if result.get('success'):
+            acc = result.get('accuracy')
+            acc_percent = f"{acc * 100:.2f}%" if acc is not None else "N/A"
+            return jsonify({
+                'status': 'success',
+                'message': 'เทรนโมเดลใหม่สำเร็จ',
+                'accuracy': acc,
+                'accuracy_percent': acc_percent
+            })
+        return jsonify({'status': 'error', 'message': result.get('message', 'เทรนโมเดลไม่สำเร็จ')}), 400
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': f'เกิดข้อผิดพลาด: {str(e)}'}), 500
+
+@app.route('/admin/retrain_model_sync', methods=['POST'])
+def retrain_model_sync():
+    """Fallback retrain แบบ form submit (ไม่พึ่ง JavaScript)"""
+    print("➡️ hit /admin/retrain_model_sync", flush=True)
+    write_train_log("➡️ hit /admin/retrain_model_sync")
+    if not session.get('is_admin'):
+        return redirect(url_for('admin_login'))
+
+    try:
+        print("\n🧠 Admin requested model retraining (sync form)...", flush=True)
+        write_train_log("🧠 Admin requested model retraining (sync form)...")
+        result = retrain_face_model_from_existing_images()
+        if result.get('success'):
+            acc = result.get('accuracy')
+            acc_percent = f"{acc * 100:.2f}%" if acc is not None else "N/A"
+            return redirect(url_for(
+                'admin_dashboard',
+                train_status='success',
+                train_message=f'เทรนโมเดลใหม่สำเร็จ (Accuracy: {acc_percent})'
+            ))
+        return redirect(url_for(
+            'admin_dashboard',
+            train_status='error',
+            train_message=result.get('message', 'เทรนโมเดลไม่สำเร็จ')
+        ))
+    except Exception as e:
+        return redirect(url_for(
+            'admin_dashboard',
+            train_status='error',
+            train_message=f'เกิดข้อผิดพลาด: {str(e)}'
+        ))
 
 @app.route('/admin/reset_votes', methods=['POST'])
 def reset_votes():
