@@ -324,7 +324,7 @@
                     };
                 })
                 .catch(err => { 
-                    errorMsg.innerText = "❌ ไม่สามารถเปิดกล้องได้: โปรดอนุญาตการใช้เว็บแคม";
+                    errorMsg.innerText = "ไม่สามารถเปิดกล้องได้: โปรดอนุญาตการใช้เว็บแคม";
                     cameraOverlay.innerText = "ไม่สามารถเข้าถึงกล้องได้\nโปรดอนุญาตการใช้เว็บแคม";
                     cameraOverlay.style.display = 'flex';
                     video.style.opacity = 0;
@@ -339,16 +339,16 @@
             const studentid = studentidInput.value.trim();
             
             if (!studentid) { 
-                errorMsg.innerText = "⚠️ กรุณากรอกรหัสนักเรียนที่ลงทะเบียน"; 
+                errorMsg.innerText = "กรุณากรอกรหัสนักเรียนที่ลงทะเบียน"; 
                 return; 
             }
             
             if (video.readyState < 2 || video.paused || video.ended || video.style.opacity === "0") {
-                errorMsg.innerText = "⚠️ กล้องยังไม่พร้อมใช้งาน หรือยังไม่ได้รับอนุญาต";
+                errorMsg.innerText = "กล้องยังไม่พร้อมใช้งาน หรือยังไม่ได้รับอนุญาต";
                 return;
             }
 
-            errorMsg.innerText = "⏳ กำลังตรวจสอบ...";
+            errorMsg.innerText = "กำลังตรวจสอบ...";
             const canvas = document.getElementById('canvas');
             canvas.width = video.videoWidth; 
             canvas.height = video.videoHeight;
@@ -374,11 +374,11 @@
                         if (data.status === 'success') {
                             window.location.href = data.redirect_url;
                         } else {
-                            errorMsg.innerText = "❌ " + (data.message || "เกิดข้อผิดพลาดในการตรวจสอบ");
+                            errorMsg.innerText = (data.message || "เกิดข้อผิดพลาดในการตรวจสอบ");
                         }
                     })
                     .catch(err => { 
-                        errorMsg.innerText = "🔥 ข้อผิดพลาด: " + err.message; 
+                        errorMsg.innerText = "ข้อผิดพลาด: " + err.message; 
                     });
             }, 'image/png');
         }
