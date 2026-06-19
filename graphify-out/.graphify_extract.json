@@ -1,0 +1,2204 @@
+{
+  "nodes": [
+    {
+      "id": "app",
+      "label": "app.py",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_write_train_log",
+      "label": "write_train_log()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L65",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_log_request_path",
+      "label": "log_request_path()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L72",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_cv2_imread_utf8",
+      "label": "cv2_imread_utf8()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L76",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_cv2_imwrite_utf8",
+      "label": "cv2_imwrite_utf8()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L88",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_normalize_all_existing_images",
+      "label": "normalize_all_existing_images()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L100",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_normalize_image_for_camera_variation",
+      "label": "normalize_image_for_camera_variation()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L164",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_detect_faces",
+      "label": "detect_faces()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L187",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_detect_and_crop_face",
+      "label": "detect_and_crop_face()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L215",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_load_data_rgb",
+      "label": "load_data_rgb()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L227",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_process_upload_to_cv2",
+      "label": "process_upload_to_cv2()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L258",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_compatibleinputlayer",
+      "label": "CompatibleInputLayer",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L264",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_compatibleinputlayer_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L266",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_load_face_model",
+      "label": "load_face_model()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L271",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_replace_batch_shape_key",
+      "label": "_replace_batch_shape_key()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L299",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_load_face_model_with_patched_keras_config",
+      "label": "load_face_model_with_patched_keras_config()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L310",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_consoletraininglogger",
+      "label": "ConsoleTrainingLogger",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L341",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_consoletraininglogger_on_train_begin",
+      "label": ".on_train_begin()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L343",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_consoletraininglogger_on_epoch_end",
+      "label": ".on_epoch_end()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L348",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_consoletraininglogger_on_train_end",
+      "label": ".on_train_end()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L366",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_retrain_face_model_from_existing_images",
+      "label": "retrain_face_model_from_existing_images()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L371",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_register_get",
+      "label": "register_get()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L424",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_register_post",
+      "label": "register_post()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L428",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_index",
+      "label": "index()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L586",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_vote_page",
+      "label": "vote_page()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L655",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_submit_vote",
+      "label": "submit_vote()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L662",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_results",
+      "label": "results()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L680",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_admin_login",
+      "label": "admin_login()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L687",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_admin_dashboard",
+      "label": "admin_dashboard()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L698",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_add_candidate",
+      "label": "add_candidate()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L712",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_delete_candidate",
+      "label": "delete_candidate()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L724",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_normalize_images",
+      "label": "normalize_images()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L733",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_retrain_model",
+      "label": "retrain_model()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L753",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_retrain_model_sync",
+      "label": "retrain_model_sync()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L778",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_reset_votes",
+      "label": "reset_votes()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L810",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_logout",
+      "label": "logout()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L821",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_uploaded_file",
+      "label": "uploaded_file()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L826",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_101",
+      "label": "Normalize รูปภาพเก่าทั้งหมดที่มีอยู่แล้ว",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L101",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_165",
+      "label": "Normalize ภาพเพื่อลดผลกระทบจากกล้องต่างกัน",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L165",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_188",
+      "label": "ตรวจจับใบหน้าโดยใช้ YOLO ก่อน (ถ้ามี), แล้ว fallback ไป Haar Cascade     คืนค่า",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L188",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_265",
+      "label": "รองรับโมเดลเก่าที่ serialize ด้วย key ชื่อ batch_shape",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L265",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_272",
+      "label": "โหลดโมเดลแบบทนทานกับไฟล์ .keras เก่า/ใหม่",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L272",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_342",
+      "label": "แสดงสถานะการเทรนใน console แบบอ่านง่าย",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L342",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_372",
+      "label": "เทรนโมเดลใหม่จากรูปผู้ใช้ที่มีอยู่ เพื่อซ่อมกรณีไฟล์โมเดลเก่าโหลดไม่ได้",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L372",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_734",
+      "label": "Route สำหรับ normalize รูปภาพเก่าทั้งหมด (ต้องเป็น admin)",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L734",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_754",
+      "label": "Route สำหรับสั่งเทรนโมเดลใหม่ด้วยมือ (ต้องเป็น admin)",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L754",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_rationale_779",
+      "label": "Fallback retrain แบบ form submit (ไม่พึ่ง JavaScript)",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L779",
+      "_origin": "ast"
+    },
+    {
+      "id": "app_flask_app",
+      "label": "Flask app instance",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 60",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_users_csv",
+      "label": "users.csv",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 29",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_votes_csv",
+      "label": "votes.csv",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_label_map_json",
+      "label": "label_map.json",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 412",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_face_cnn_model_keras",
+      "label": "face_cnn_model.keras",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 410",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_admin_password",
+      "label": "ADMIN_PASSWORD",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 34",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_yolo_model",
+      "label": "yolo_model",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 38",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "app_face_cascade",
+      "label": "face_cascade (Haar)",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 37",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "model_label_map",
+      "label": "model/label_map.json",
+      "file_type": "image",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\label_map.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_label_map",
+      "label": "best model/label_map.json",
+      "file_type": "image",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\label_map.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "best_model_nested_label_map",
+      "label": "best model/best model/label_map.json",
+      "file_type": "image",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\best model\\label_map.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deepest_model_label_map",
+      "label": "best model/best model/best model/label_map.json",
+      "file_type": "image",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\best model\\best model\\label_map.json",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_flask",
+      "label": "flask",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_tensorflow",
+      "label": "tensorflow",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 2",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_opencv_python",
+      "label": "opencv-python",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_pandas",
+      "label": "pandas",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 4",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_numpy",
+      "label": "numpy",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_pillow",
+      "label": "Pillow",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_scikit_learn",
+      "label": "scikit-learn",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_python_dotenv",
+      "label": "python-dotenv",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_pyngrok",
+      "label": "pyngrok",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 9",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_ultralytics",
+      "label": "ultralytics",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 10",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "requirements_graphifyy",
+      "label": "graphifyy",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 11",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "skill_reference",
+      "label": "Skill Reference",
+      "file_type": "document",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "gemini_claude",
+      "label": "@CLAUDE.md",
+      "file_type": "document",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\GEMINI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "history_modifications",
+      "label": "Modification History",
+      "file_type": "document",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\history.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_project_instructions",
+      "label": "CLAUDE.md project instructions",
+      "file_type": "document",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\CLAUDE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "admin_dashboard_html",
+      "label": "admin_dashboard.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\admin_dashboard.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "admin_login_html",
+      "label": "admin_login.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\admin_login.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "index_html",
+      "label": "index.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "register_html",
+      "label": "register.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\register.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "result_html",
+      "label": "result.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\result.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "vote_html",
+      "label": "vote.html",
+      "file_type": "code",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\vote.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cnn_architecture",
+      "label": "CNN architecture",
+      "file_type": "concept",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 388",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "camera_normalization",
+      "label": "Camera variation normalization",
+      "file_type": "concept",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 164",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "yolo_haar_fallback",
+      "label": "YOLO-to-Haar fallback",
+      "file_type": "concept",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 187",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "admin_password_rationale",
+      "label": "Hardcoded admin password rationale",
+      "file_type": "rationale",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 34",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "graphify_dependency_rationale",
+      "label": "Graphify dependency rationale",
+      "file_type": "rationale",
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 11",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "app",
+      "target": "pandas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "pil",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "pyngrok",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "tensorflow",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "shutil",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "cv2",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "tempfile",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "dotenv",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "flask",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "sklearn_model_selection",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "tensorflow_keras_models",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "tensorflow_keras_layers",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "ultralytics",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_write_train_log",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_log_request_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_cv2_imread_utf8",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_cv2_imwrite_utf8",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_normalize_all_existing_images",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_detect_faces",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_detect_and_crop_face",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_load_data_rgb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_process_upload_to_cv2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L258",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_compatibleinputlayer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "app_compatibleinputlayer",
+      "target": "app_compatibleinputlayer_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L266",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_load_face_model",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L271",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_replace_batch_shape_key",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L299",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_load_face_model_with_patched_keras_config",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L310",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_consoletraininglogger",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L341",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger",
+      "target": "app_consoletraininglogger_on_train_begin",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L343",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger",
+      "target": "app_consoletraininglogger_on_epoch_end",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L348",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger",
+      "target": "app_consoletraininglogger_on_train_end",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L366",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L371",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_register_get",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L424",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_register_post",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L428",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_index",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L586",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_vote_page",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L655",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_submit_vote",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L662",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_results",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L680",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_admin_login",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L687",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_admin_dashboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L698",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_add_candidate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L712",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_delete_candidate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L724",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_normalize_images",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L733",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_retrain_model",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L753",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_retrain_model_sync",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L778",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_reset_votes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L810",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_logout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L821",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_uploaded_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L826",
+      "weight": 1.0
+    },
+    {
+      "source": "app_normalize_all_existing_images",
+      "target": "app_cv2_imread_utf8",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "app_normalize_all_existing_images",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "app_normalize_all_existing_images",
+      "target": "app_cv2_imwrite_utf8",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_and_crop_face",
+      "target": "app_detect_faces",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_and_crop_face",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_data_rgb",
+      "target": "app_cv2_imread_utf8",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L241",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_data_rgb",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L244",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_face_model",
+      "target": "app_load_face_model_with_patched_keras_config",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L289",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_face_model_with_patched_keras_config",
+      "target": "app_replace_batch_shape_key",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L327",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger_on_train_begin",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L346",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger_on_epoch_end",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L360",
+      "weight": 1.0
+    },
+    {
+      "source": "app_consoletraininglogger_on_train_end",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L369",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_load_data_rgb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L375",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_consoletraininglogger",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L405",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L418",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_process_upload_to_cv2",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L449",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_detect_and_crop_face",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L452",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_cv2_imwrite_utf8",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L464",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_detect_faces",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L472",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_load_data_rgb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L497",
+      "weight": 1.0
+    },
+    {
+      "source": "app_register_post",
+      "target": "app_consoletraininglogger",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L552",
+      "weight": 1.0
+    },
+    {
+      "source": "app_index",
+      "target": "app_load_face_model",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L594",
+      "weight": 1.0
+    },
+    {
+      "source": "app_index",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L597",
+      "weight": 1.0
+    },
+    {
+      "source": "app_index",
+      "target": "app_process_upload_to_cv2",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L619",
+      "weight": 1.0
+    },
+    {
+      "source": "app_index",
+      "target": "app_detect_and_crop_face",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L620",
+      "weight": 1.0
+    },
+    {
+      "source": "app_normalize_images",
+      "target": "app_normalize_all_existing_images",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L739",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_model",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L756",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_model",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L763",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_model_sync",
+      "target": "app_write_train_log",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L781",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_model_sync",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L788",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_101",
+      "target": "app_normalize_all_existing_images",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_165",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_188",
+      "target": "app_detect_faces",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_265",
+      "target": "app_compatibleinputlayer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L265",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_272",
+      "target": "app_load_face_model",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_342",
+      "target": "app_consoletraininglogger",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L342",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_372",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L372",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_734",
+      "target": "app_normalize_images",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L734",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_754",
+      "target": "app_retrain_model",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L754",
+      "weight": 1.0
+    },
+    {
+      "source": "app_rationale_779",
+      "target": "app_retrain_model_sync",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L779",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_load_data_rgb",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 375",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_label_map_json",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 412",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "app_face_cnn_model_keras",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 410",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_face_model",
+      "target": "app_face_cnn_model_keras",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 276",
+      "weight": 1.0
+    },
+    {
+      "source": "app_load_data_rgb",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 244",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_and_crop_face",
+      "target": "app_detect_faces",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 216",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_and_crop_face",
+      "target": "app_normalize_image_for_camera_variation",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 223",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_faces",
+      "target": "app_yolo_model",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 196",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_faces",
+      "target": "app_face_cascade",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 213",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "app_retrain_face_model_from_existing_images",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 597",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "app_load_face_model",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 594",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "app_users_csv",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 435",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "app_votes_csv",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 657",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "app_admin_password",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 690",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_flask",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 14",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_tensorflow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_opencv_python",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_pandas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_numpy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_scikit_learn",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 15",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_python_dotenv",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 12",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_ultralytics",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 19",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_pyngrok",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_pillow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "admin_dashboard_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 704",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "admin_login_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 695",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "index_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 652",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "register_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 425",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "result_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 684",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "vote_html",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 659",
+      "weight": 1.0
+    },
+    {
+      "source": "app_retrain_face_model_from_existing_images",
+      "target": "cnn_architecture",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 388",
+      "weight": 1.0
+    },
+    {
+      "source": "app_normalize_image_for_camera_variation",
+      "target": "camera_normalization",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 164",
+      "weight": 1.0
+    },
+    {
+      "source": "app_detect_faces",
+      "target": "yolo_haar_fallback",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 187",
+      "weight": 1.0
+    },
+    {
+      "source": "model_label_map",
+      "target": "app_label_map_json",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\label_map.json",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "best_model_label_map",
+      "target": "app_label_map_json",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\label_map.json",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "best_model_nested_label_map",
+      "target": "app_label_map_json",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\best model\\label_map.json",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "deepest_model_label_map",
+      "target": "app_label_map_json",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\Face_Recog_App\\model\\best model\\best model\\best model\\label_map.json",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_password",
+      "target": "admin_password_rationale",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py",
+      "source_location": "line 34",
+      "weight": 1.0
+    },
+    {
+      "source": "requirements_graphifyy",
+      "target": "graphify_dependency_rationale",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 11",
+      "weight": 1.0
+    },
+    {
+      "source": "skill_reference",
+      "target": "claude_project_instructions",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "history_modifications",
+      "target": "claude_project_instructions",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\history.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "admin_dashboard_html",
+      "target": "app_flask_app",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\admin_dashboard.html",
+      "source_location": "line 159",
+      "weight": 1.0
+    },
+    {
+      "source": "register_html",
+      "target": "app_flask_app",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\register.html",
+      "source_location": "line 332",
+      "weight": 1.0
+    },
+    {
+      "source": "index_html",
+      "target": "app_flask_app",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\index.html",
+      "source_location": "line 207",
+      "weight": 1.0
+    },
+    {
+      "source": "vote_html",
+      "target": "app_flask_app",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\templates\\vote.html",
+      "source_location": "line 124",
+      "weight": 1.0
+    },
+    {
+      "source": "app_flask_app",
+      "target": "requirements_graphifyy",
+      "relation": "references",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\requirements.txt",
+      "source_location": "line 11",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "retraining_pipeline",
+      "label": "Model retraining pipeline",
+      "nodes": [
+        "app_retrain_face_model_from_existing_images",
+        "app_load_data_rgb",
+        "cnn_architecture",
+        "app_face_cnn_model_keras",
+        "app_label_map_json"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py"
+    },
+    {
+      "id": "face_verification_flow",
+      "label": "Face verification flow",
+      "nodes": [
+        "app_flask_app",
+        "app_load_face_model",
+        "app_detect_and_crop_face",
+        "app_detect_faces",
+        "yolo_haar_fallback",
+        "camera_normalization"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py"
+    },
+    {
+      "id": "voting_data_flow",
+      "label": "Voting data flow",
+      "nodes": [
+        "app_flask_app",
+        "app_users_csv",
+        "app_votes_csv",
+        "vote_html",
+        "result_html"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "D:\\Download\\AI\\ElectionAppFinalMix\\app.py"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

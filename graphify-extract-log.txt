@@ -1,0 +1,11 @@
+[graphify] WARNING: ollama backend selected with no OLLAMA_API_KEY set; sending corpus to http://localhost:11434/v1. Set OLLAMA_API_KEY (any non-empty value) to suppress this warning.
+[graphify extract] incremental scan of D:\Download\AI\ElectionAppFinalMix
+[graphify extract] 0 code, 12 docs, 0 papers, 80 images changed; 5 unchanged; 1508 deleted
+[graphify extract] semantic extraction on 92 files via ollama...
+[graphify extract] chunk 1/4 done
+[graphify] WARNING: ollama backend selected with no OLLAMA_API_KEY set; sending corpus to http://localhost:11434/v1. Set OLLAMA_API_KEY (any non-empty value) to suppress this warning.
+[graphify] LLM returned invalid JSON, skipping chunk (first 200 chars: ' {\n"nodes": [\n{"id": "FaceRecogApp_image", "label": "Collection of images", "file_type": "image", "source_file": "Face_Recog_App\\static\\uploads\\UserImages\\Non_N"},\n{"id": "FaceRecogApp_image_Thai", "l')
+[graphify] ollama returned a hollow response (content=no nodes/edges, output_tokens=375); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] chunk of 20 truncated at depth 0, splitting into halves of 10 and 10
+[graphify] WARNING: ollama backend selected with no OLLAMA_API_KEY set; sending corpus to http://localhost:11434/v1. Set OLLAMA_API_KEY (any non-empty value) to suppress this warning.
+[graphify] WARNING: ollama backend selected with no OLLAMA_API_KEY set; sending corpus to http://localhost:11434/v1. Set OLLAMA_API_KEY (any non-empty value) to suppress this warning.

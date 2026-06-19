@@ -1,0 +1,17 @@
+# Ignore directories not part of the project
+.conda/
+.claude/
+.git/
+.vscode/
+graphify-out/
+DownloadAIElectionAppFinalMixgraphify/
+
+# Ignore common non-project files
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+node_modules/
+.venv/
+venv/
+env/

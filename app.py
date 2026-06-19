@@ -14,7 +14,7 @@ import base64
 from flask import Flask, request, render_template, make_response, redirect, url_for, send_from_directory, session, jsonify
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization, Activation, BatchNormalization
 try:
     from ultralytics import YOLO
 except ImportError:
@@ -387,8 +387,8 @@ def retrain_face_model_from_existing_images():
 
     model = Sequential([
         tf.keras.Input(shape=(100, 100, 3)),
-        Conv2D(32, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
-        Conv2D(64, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
+        Conv2D(32, (3,3), padding='same'), BatchNormalization(), Activation('relu'), MaxPooling2D(2,2), Dropout(0.2),
+        Conv2D(64, (3,3), padding='same'), BatchNormalization(), Activation('relu'), MaxPooling2D(2,2), Dropout(0.2),
         Conv2D(128, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2),
         Flatten(),
         Dense(128, activation='relu'), Dropout(0.5),
@@ -519,10 +519,10 @@ def register_post():
                 tf.keras.Input(shape=(100, 100, 3)), 
                 
                 # ชั้น Conv2D แรก (32 ฟิลเตอร์) เพื่อสกัดคุณลักษณะ + ลดขนาดภาพ (MaxPooling) + ป้องกัน Overfitting (Dropout)
-                Conv2D(32, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2), 
+                Conv2D(32, (3,3), padding='same'), BatchNormalization(), Activation('relu'), MaxPooling2D(2,2), Dropout(0.2), 
                 
                 # ชั้น Conv2D ที่สอง (64 ฟิลเตอร์) เพื่อสกัดคุณลักษณะที่ซับซ้อนขึ้น
-                Conv2D(64, (3,3), activation='relu'), MaxPooling2D(2,2), Dropout(0.2), 
+                Conv2D(64, (3,3), padding='same'), BatchNormalization(), Activation('relu'), MaxPooling2D(2,2), Dropout(0.2), 
 
                 # ชั้น Conv2D ที่สาม (ที่เพิ่มมา): 128 ฟิลเตอร์ + Max Pooling + Dropout 20%
                 # ช่วยให้โมเดลเรียนรู้คุณลักษณะที่ซับซ้อนและละเอียดมากขึ้น

@@ -5,313 +5,279 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ลงทะเบียนผู้มีสิทธิ์เลือกตั้ง</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* Global & Body Styles */
         body {
             margin: 0;
             font-family: 'Prompt', sans-serif;
-            color: #e0e0e0;
+            color: #333333;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; 
-            background: #121212; /* Deep dark background */
+            background: #f5f5f5;
+            padding: 20px; /* Add some padding around the edges */
+            box-sizing: border-box; /* Ensure padding doesn't increase total width */
         }
-
-        /* --- Star Particle Background (เหมือนหน้า Index) --- */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .stars::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            /* สร้างดาวโดยใช้ box-shadow (ใช้ชุดเดิม) */
-            box-shadow: 
-                100px 30px #fff, 200px 70px #fff, 350px 10px #fff, 450px 50px #fff, 600px 80px #fff,
-                700px 20px #fff, 850px 60px #fff, 950px 30px #fff, 1100px 90px #fff, 1250px 40px #fff,
-                50px 150px #fff, 150px 220px #fff, 300px 180px #fff, 400px 250px #fff, 550px 210px #fff,
-                650px 280px #fff, 800px 240px #fff, 900px 310px #fff, 1050px 270px #fff, 1200px 330px #fff,
-                120px 450px #fff, 280px 520px #fff, 450px 480px #fff, 620px 550px #fff, 780px 510px #fff,
-                950px 580px #fff, 1100px 540px #fff, 1250px 610px #fff, 1400px 570px #fff, 1550px 630px #fff,
-                100px 750px #fff, 200px 820px #fff, 350px 780px #fff, 450px 850px #fff, 600px 810px #fff,
-                700px 880px #fff, 850px 840px #fff, 950px 910px #fff, 1100px 870px #fff, 1250px 930px #fff;
-            
-            background: transparent;
-            width: 1px;
-            height: 1px;
-            animation: starTwinkle 15s linear infinite;
-        }
-
-        @keyframes starTwinkle {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-50px); opacity: 0.8; }
-        }
-
-        /* Main Card Container - The Split Card */
         .main-card {
-            background: #1a1a2e;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 950px; 
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%; /* Use 100% width for better responsiveness */
+            max-width: 1000px; /* Increased max-width for more spacious layout */
             display: flex;
             overflow: hidden;
-            min-height: 550px;
-            position: relative;
-            z-index: 10; 
+            min-height: 550px; /* Slightly increased min-height */
         }
-
+        .form-container {
+            display: flex;
+            flex: 1;
+        }
+        .main-card > .form-container {
+            flex: 1; /* Ensure the form takes up its share of space within main-card */
+        }
+        .left-panel, .right-panel {
+            flex: 1; /* Make both panels take equal width */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to the start */
+        }
+        .left-panel {
+            background: #fafafa;
+            border-right: 1px solid #eeeeee; /* Separator for visual distinction */
+        }
+        .right-panel {
+            background: #ffffff;
+            align-items: center; /* Center items in right panel */
+            text-align: center; /* Center text in right panel */
+        }
         h2 {
             font-weight: 700;
-            color: #80c0ff;
-            margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 26px; /* Slightly larger heading */
+            color: #2c3e50;
+            margin-bottom: 25px; /* More space below heading */
         }
-        
-        /* --- Left Panel: Input Fields --- */
-        .left-panel {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: #232340; /* Darker Blue (เหมือน Right Panel ของหน้า Index) */
-        }
-        
-        /* Input Field */
-        input {
+        .form-group {
+            margin-bottom: 15px; /* Spacing between form groups */
             width: 100%;
-            padding: 15px 18px;
-            margin-bottom: 25px;
-            border: 1px solid #4a4a6e;
-            background: #1a1a2e;
-            color: #ffffff;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: border-color 0.3s;
         }
-        input::placeholder {
-            color: #999999;
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555555;
         }
-        input:focus {
-            border-color: #ff7f50; /* ใช้สี Coral Orange เป็นสีเน้นในส่วน Input */
+        input[type="text"] { /* Target specific input types */
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box; /* Include padding in element's total width */
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #80c0ff; /* Highlight on focus */
             outline: none;
         }
-
-        /* --- Right Panel: Camera & Actions --- */
-        .right-panel {
-            flex: 1.2;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #1a1a2e; /* Card color */
-        }
-        
-        /* Instruction & Status */
-        #instruction {
-            font-size: 18px;
-            color: #80c0ff;
+        .btn-capture, .btn-main {
+            border: none;
+            padding: 14px 25px; /* Increased padding for buttons */
+            border-radius: 8px; /* Slightly more rounded corners */
+            cursor: pointer;
+            width: 100%;
+            font-size: 17px; /* Slightly larger font size */
             font-weight: 600;
-            margin-top: 10px;
-            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 15px; /* Adjusted margin-top for consistency */
         }
-
-        #status {
-            color: #999999;
+        .btn-capture {
+            background: #ff7f50; /* Orange */
+            color: #ffffff;
+        }
+        .btn-capture:hover:not(:disabled) {
+            background: #ff6347; /* Darker orange on hover */
+            transform: translateY(-2px);
+        }
+        .btn-main {
+            background: #2ecc71; /* Green */
+            color: #ffffff;
+            margin-top: 20px; /* More space above submit button */
+        }
+        .btn-main:hover:not(:disabled) {
+            background: #27ae60; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+        .btn-capture:disabled, .btn-main:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: translateY(0);
+        }
+        .back-link {
+            margin-top: auto; /* Push to the bottom of the left panel */
+            display: block;
+            color: #555555;
+            text-decoration: none;
             font-size: 14px;
-            margin-bottom: 15px;
-            font-weight: 500;
-            text-align: center;
+            padding-top: 20px; /* Ensure some space above it */
         }
-
-        /* Video Area */
+        .back-link:hover {
+            color: #2c3e50;
+        }
         .video-box {
             width: 100%;
-            max-width: 350px;
-            aspect-ratio: 4/3; 
-            background-color: #2c3e50; 
-            border-radius: 15px;
+            max-width: 320px; /* Slightly larger video box */
+            aspect-ratio: 4/3;
+            background: #e0e0e0;
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
-            border: 3px solid #ff7f50; /* Orange/Coral accent */
+            border: 2px solid #80c0ff;
+            margin-bottom: 15px; /* Space below video box */
         }
-        
-        #video {
+        .video-box video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transform: scaleX(-1); 
-            display: block;
+            object-fit: cover; /* Ensure video covers the box */
+            transform: scaleX(-1); /* Mirror the video */
         }
-
-        /* Buttons */
-        button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.1s;
+        p#instruction {
+            font-size: 18px; /* Larger instruction text */
+            color: #2c3e50;
+            min-height: 40px; /* Reserve space for instructions */
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-capture {
-            background: #ff7f50; /* Coral Orange for Capture */
-            color: #1a1a2e; 
-            box-shadow: 0 4px 10px rgba(255, 127, 80, 0.3);
-        }
-        .btn-capture:hover:not(:disabled) { background: #ff6347; }
-        .btn-capture:disabled { background: #4a4a6e; color: #999999; cursor: not-allowed; }
-
-        .btn-main {
-            background: #2ecc71; /* Green for Submit/Success */
-            color: #1a1a2e;
-            width: 100%;
-            font-size: 18px;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
-        }
-        .btn-main:hover:not(:disabled) { background: #27ae60; }
-        .btn-main:disabled {
-            background: #4a4a6e;
-            color: #999999;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        /* Loader & Result */
-        #loader {
-            display: none;
-            color: #ff7f50;
+            margin-top: 0;
+            margin-bottom: 15px;
             font-weight: 600;
+        }
+        p#status {
+            font-size: 15px;
+            color: #777777;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+        #loader {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-top: 20px;
             font-size: 16px;
-            padding: 15px;
-            border: 1px dashed #ff7f50;
-            border-radius: 8px;
-            text-align: center;
+            color: #555555;
+            font-weight: 600;
         }
-
+        #loader::before {
+            content: '';
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         #register-result {
             display: none;
             margin-top: 20px;
-            padding: 20px;
-            background: #232340;
-            border: 2px solid #2ecc71;
-            border-radius: 10px;
-        }
-        #register-result h3 { color: #2ecc71; }
-        
-        .back-link {
-            display: block;
-            margin-top: 25px;
-            color: #999999;
-            text-decoration: none;
-            font-size: 14px;
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
+            width: 100%;
+            max-width: 320px;
+            box-sizing: border-box;
         }
-        .back-link:hover {
-            color: #80c0ff;
+        #register-result h3 {
+            color: #2ecc71;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        #register-result p {
+            margin-bottom: 15px;
+            color: #444444;
+        }
+        #detected-face-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #cccccc;
         }
 
-
-        /* --- Responsive Adjustments --- */
+        /* Responsive adjustments */
         @media (max-width: 800px) {
             .main-card {
-                flex-direction: column; 
+                flex-direction: column;
                 min-height: auto;
-                width: 95%;
+            }
+            .left-panel, .right-panel {
+                border-right: none;
+                border-bottom: 1px solid #eeeeee; /* Separator for mobile */
+                padding-bottom: 20px;
             }
             .left-panel {
-                padding: 30px;
-                order: 1; /* Form on top */
+                padding-bottom: 0px;
             }
-            .right-panel {
-                padding: 30px;
-                order: 2; /* Camera/Action below */
+            .back-link {
+                margin-top: 20px; /* Adjust margin for mobile */
+                padding-top: 0;
             }
-            .video-box {
-                max-width: 100%;
+        }
+        @media (max-width: 500px) {
+            h2 {
+                font-size: 22px;
             }
-            .right-panel h2 {
-                text-align: center;
+            .btn-capture, .btn-main {
+                font-size: 16px;
+                padding: 12px 20px;
             }
         }
     </style>
 </head>
-
 <body>
-    
-    <div class="stars"></div>
-
     <div class="main-card">
-        <form style="display: contents;">
+        <form id="registrationForm" class="form-container">
             <div class="left-panel">
                 <h2>📝 กรอกข้อมูลผู้สมัคร</h2>
-                <input type="text" id="name" name="name" placeholder="ชื่อ" required>
-                <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
-                <input type="text" id="studentid" name="studentid" placeholder="รหัสนักเรียน (ใช้ยืนยันตัวตน)" required> 
-                
-                <p style="font-size: 14px; color: #999999; margin-top: 30px;">
-                    กรุณากรอกข้อมูลและรหัสนักเรียนให้ครบถ้วนก่อนเข้าสู่ขั้นตอนการถ่ายภาพใบหน้า
-                </p>
-                
+                <div class="form-group">
+                    <label for="name">ชื่อ:</label>
+                    <input type="text" id="name" name="name" placeholder="ชื่อ" required>
+                </div>
+                <div class="form-group">
+                    <label for="surname">นามสกุล:</label>
+                    <input type="text" id="surname" name="surname" placeholder="นามสกุล" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentid">รหัสนักเรียน:</label>
+                    <input type="text" id="studentid" name="studentid" placeholder="รหัสนักเรียน (ใช้ยืนยันตัวตน)" required>
+                </div>
+                <p style="font-size: 14px; color: #777777; margin-top: 5px;">กรุณากรอกข้อมูลและรหัสนักเรียนให้ครบก่อนถ่ายภาพ</p>
                 <a href="/" class="back-link">← กลับหน้าหลัก</a>
             </div>
-            
             <div class="right-panel">
                 <h2>📸 ถ่ายภาพใบหน้า (8 ท่า)</h2>
-                
                 <p id="instruction">👉 ท่าที่ 1: กรุณามองหน้าตรง</p>
-
                 <div class="video-box">
                     <video id="video" autoplay playsinline></video>
                 </div>
-                
                 <p id="status">ถ่ายแล้ว (0/8) ภาพ</p>
-                
-                <button type="button" class="btn-capture" onclick="capture()">
-                    📸 ถ่ายภาพท่าปัจจุบัน
-                </button>
-                
-                <button type="button" class="btn-main" disabled id="submitBtn" onclick="submitData()">
-                    ✅ ยืนยันและส่งข้อมูลลงทะเบียน
-                </button>
-                
-                <div id="loader">
-                    ⏳ กำลังประมวลผลและเทรนโมเดล...<br>
-                    <span style="font-size:12px; font-weight:400;">(ขั้นตอนนี้อาจใช้เวลาสักครู่)</span>
-                </div>
-
-                <div id="register-result">
-                    <h3 style="margin-top:0;">🎉 ลงทะเบียนสำเร็จ!</h3>
+                <button type="button" class="btn-capture" onclick="capture()">📸 ถ่ายภาพท่าปัจจุบัน</button>
+                <button type="button" class="btn-main" disabled id="submitBtn" onclick="submitData()">✅ ยืนยันและส่งข้อมูลลงทะเบียน</button>
+                <div id="loader" style="display: none;">⏳ กำลังประมวลผลและเทรนโมเดล...</div>
+                <div id="register-result" style="display: none;">
+                    <h3>🎉 ลงทะเบียนสำเร็จ!</h3>
                     <p>ระบบบันทึกและตรวจพบใบหน้าของคุณแล้ว:</p>
-                    <img id="detected-face-img" src="" alt="Detected Face" style="width: 150px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                    <p style="color: #999999; font-size: 14px; margin-top:10px;">กำลังนำท่านกลับหน้าหลักใน 3 วินาที...</p>
+                    <img id="detected-face-img" src="" alt="Detected Face">
                 </div>
             </div>
         </form>
     </div>
-
     <script>
         const video = document.getElementById('video');
         const status = document.getElementById('status');
@@ -321,124 +287,60 @@
         const resultDiv = document.getElementById('register-result');
         const resultImg = document.getElementById('detected-face-img');
         const captureButton = document.querySelector('.btn-capture');
-        
         let images = [];
         const TOTAL_IMAGES = 8;
-        
-        // รายการท่าทาง (8 ท่า)
         const instructionsList = [
-            "ท่าที่ 1: กรุณามองหน้าตรง", "ท่าที่ 2: หันซ้ายเล็กน้อย", "ท่าที่ 3: หันขวาเล็กน้อย", 
-            "ท่าที่ 4: ก้มหน้า", "ท่าที่ 5: เงยหน้า", "ท่าที่ 6: ยิ้ม", 
-            "ท่าที่ 7: หลับตา", "ท่าที่ 8: ตาโต",
+            "ท่าที่ 1: กรุณามองหน้าตรง", "ท่าที่ 2: หันซ้ายเล็กน้อย", "ท่าที่ 3: หันขวาเล็กน้อย",
+            "ท่าที่ 4: ก้มหน้า", "ท่าที่ 5: เงยหน้า", "ท่าที่ 6: ยิ้ม",
+            "ท่าที่ 7: หลับตา", "ท่าที่ 8: ตาโต"
         ];
-        
         const nameInput = document.getElementById('name');
         const surnameInput = document.getElementById('surname');
-        // แก้ไข: ใช้ studentidInput แทน studentCodeInput
-        const studentidInput = document.getElementById('studentid'); 
-
-        // เปิดกล้อง
+        const studentidInput = document.getElementById('studentid');
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(s => video.srcObject = s)
-            .catch(err => instruction.innerText = "❌ ไม่สามารถเปิดกล้องได้: โปรดตรวจสอบการอนุญาตเว็บแคม");
-
+            .catch(err => instruction.innerText = "❌ ไม่สามารถเปิดกล้องได้");
         window.capture = function() {
             if (images.length >= TOTAL_IMAGES) return;
-
-            // ตรวจสอบข้อมูลเบื้องต้น
-            // แก้ไข: ตรวจสอบ studentid แทน studentCode
-            if (!nameInput.value || !surnameInput.value || !studentidInput.value) {
-                alert("กรุณากรอกข้อมูล ชื่อ-นามสกุล และรหัสนักเรียนให้ครบถ้วนก่อนถ่ายภาพ!");
-                return;
-            }
-            
+            if (!nameInput.value || !surnameInput.value || !studentidInput.value) { alert('กรุณากรอกข้อมูลให้ครบ'); return; }
             captureButton.disabled = true;
-
             const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth; 
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            
+            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
             canvas.toBlob(blob => {
                 images.push(blob);
                 status.innerText = `ถ่ายแล้ว (${images.length}/${TOTAL_IMAGES}) ภาพ`;
-                
                 if (images.length < TOTAL_IMAGES) {
                     instruction.innerText = instructionsList[images.length];
-                    instruction.style.color = "#80c0ff"; 
                     captureButton.disabled = false;
                 } else {
-                    instruction.innerText = "🎉 ถ่ายครบทุกท่าแล้ว! กรุณากดปุ่มยืนยัน";
-                    instruction.style.color = "#2ecc71"; // Green for completion
-                    status.style.color = "#2ecc71";
-                    captureButton.style.display = 'none'; 
+                    instruction.innerText = "🎉 ถ่ายครบทุกท่าแล้ว! กดยืนยัน";
+                    captureButton.style.display = 'none';
                     submitBtn.disabled = false;
                 }
             }, 'image/jpeg', 0.8);
-        }
-
+        };
         window.submitData = function() {
-            const name = nameInput.value;
-            const surname = surnameInput.value;
-            // แก้ไข: ใช้ studentid แทน studentCode
-            const studentid = studentidInput.value; 
-
-            if (images.length < TOTAL_IMAGES) {
-                 alert("กรุณาถ่ายภาพให้ครบ 8 ท่า");
-                 return;
-            }
-
-            // ซ่อนปุ่มและโชว์ Loader
-            captureButton.style.display = 'none'; 
-            submitBtn.style.display = 'none';
-            loader.style.display = 'block';
-
+            const name = nameInput.value, surname = surnameInput.value, studentid = studentidInput.value;
+            if (images.length < TOTAL_IMAGES) { alert('ต้องถ่ายครบ 8 ภาพ'); return; }
+            captureButton.style.display = 'none'; submitBtn.style.display = 'none'; loader.style.display = 'block';
             const formData = new FormData();
             formData.append('name', name);
             formData.append('surname', surname);
-            // แก้ไข: ส่ง studentid
             formData.append('studentid', studentid);
-            images.forEach((img, i) => formData.append('image_' + i, img, `img_${i}.jpg`));
-
-            fetch('/register', { method: 'POST', body: formData })
-                .then(res => {
-                    // ตรวจสอบสถานะ HTTP code ก่อนการอ่าน JSON
-                    if (!res.ok) {
-                        return res.json().catch(() => {
-                            throw new Error('Server error, status: ' + res.status);
-                        });
-                    }
-                    return res.json();
-                })
+            images.forEach((img,i)=> formData.append('image_' + i, img, `img_${i}.jpg`));
+            fetch('/register', {method:'POST', body:formData})
+                .then(res => res.ok ? res.json() : res.json().then(j=>{throw new Error(j.message||'Server error');}))
                 .then(data => {
-                    loader.style.display = 'none';
-
-                    if (data.status === 'success') {
-                        resultDiv.style.display = 'block';
-                        
-                        if (data.example_image) {
-                            // แสดงรูปภาพตัวอย่างที่เซิร์ฟเวอร์ส่งกลับมา (พร้อมกรอบใบหน้า)
-                            resultImg.src = 'data:image/jpeg;base64,' + data.example_image;
-                        }
-
-                        setTimeout(() => {
-                            window.location.href = data.redirect_url;
-                        }, 3000);
-
-                    } else {
-                        alert("❌ การลงทะเบียนผิดพลาด: " + (data.message || "ไม่ทราบสาเหตุ"));
-                        submitBtn.style.display = 'block'; 
-                        // ให้ปุ่ม Capture กลับมาหากถ่ายภาพไม่ครบ 8 ภาพ
-                        captureButton.style.display = images.length < TOTAL_IMAGES ? 'block' : 'none'; 
-                    }
+                    loader.style.display='none';
+                    if (data.status==='success') {
+                        resultDiv.style.display='block';
+                        if (data.example_image) resultImg.src='data:image/jpeg;base64,'+data.example_image;
+                        setTimeout(()=>{window.location.href=data.redirect_url;},3000);
+                    } else { alert('❌ '+(data.message||'error')); submitBtn.style.display='block'; captureButton.style.display='block'; }
                 })
-                .catch(err => {
-                    loader.style.display = 'none';
-                    submitBtn.style.display = 'block';
-                    captureButton.style.display = images.length < TOTAL_IMAGES ? 'block' : 'none';
-                    alert("🔥 ข้อผิดพลาดในการเชื่อมต่อ: " + err);
-                });
-        }
+                .catch(err=>{loader.style.display='none'; alert('🔥 '+err.message); submitBtn.style.display='block'; captureButton.style.display='block';});
+        };
     </script>
 </body>
 </html>

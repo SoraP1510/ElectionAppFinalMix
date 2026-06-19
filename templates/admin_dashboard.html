@@ -1,318 +1,278 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --card-bg-color: #ffffff;
+            --text-color: #4a4a4a;
+            --heading-color: #333;
+            --border-color: #eee;
+            --accent-primary: #e88f58;
+            --accent-primary-dark: #d97a40;
+            --accent-secondary: #a38d78;
+            --accent-danger: #c97a7a;
+            --accent-success: #5e8b7e;
+        }
         body {
             font-family: 'Prompt', sans-serif;
-            padding: 20px;
-            background: #ecf0f1;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
+            color: var(--text-color);
+            background: var(--bg-color);
+            margin: 0;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
         }
-
+        .header h1 {
+            color: var(--heading-color);
+            margin: 0;
+            font-size: 28px;
+        }
+        .header .nav-links a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        .header .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .card h2, .card h3 {
+            color: var(--heading-color);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
-
-        th,
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
             text-align: left;
         }
-
         th {
-            background: #34495e;
-            color: white;
+            color: var(--accent-secondary);
+            font-weight: 600;
         }
-
-        .btn-del {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        .btn {
+            padding: 10px 16px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
         }
-
-        .form-add {
-            background: #f9f9f9;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 5px;
+        .btn-primary { background: var(--accent-primary); color: #fff; }
+        .btn-primary:hover { background: var(--accent-primary-dark); transform: translateY(-1px); }
+        .btn-secondary { background: transparent; color: var(--accent-secondary); border-color: var(--accent-secondary); }
+        .btn-secondary:hover { background: rgba(163, 141, 120, 0.1); transform: translateY(-1px); }
+        .btn-danger { background: transparent; color: var(--accent-danger); border-color: var(--accent-danger); }
+        .btn-danger:hover { background: rgba(201, 122, 122, 0.1); }
+        .form-inline {
+            display: flex;
+            gap: 10px;
+        }
+        .form-inline input[type="text"] {
+            flex-grow: 1;
+            width: auto;
+            padding: 10px 14px;
             border: 1px solid #ddd;
-        }
-
-        input[type="text"] {
-            padding: 8px;
-            width: 60%;
-            margin-right: 10px;
-        }
-
-        .btn-add {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        .btn-reset {
-            background: #f39c12;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .btn-normalize {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
+            border-radius: 8px;
             font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-
-        .btn-normalize:hover {
-            background: #2980b9;
+        .form-inline input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 0 3px rgba(163, 141, 120, 0.2);
         }
-
-        .btn-normalize:disabled {
-            background: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        .btn-train {
-            background: #8e44ad;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .btn-train:hover {
-            background: #6c3483;
-        }
-
-        .btn-train:disabled {
-            background: #95a5a6;
-            cursor: not-allowed;
-        }
-
-        .logout {
-            float: right;
-            color: red;
-            text-decoration: none;
-        }
-
         .message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
         }
-
-        .message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+        .message.success { background: #eaf3f0; color: var(--accent-success); border: 1px solid var(--accent-success); }
+        .message.error { background: #fbebee; color: var(--accent-danger); border: 1px solid var(--accent-danger); }
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-
-        .message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+        .action-group .btn { width: 100%; box-sizing: border-box; text-align: center; }
+        .danger-zone h3 { border-color: var(--accent-danger); }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <a href="/logout" class="logout">ออกจากระบบ</a>
-        <h2>⚙️ จัดการรายชื่อผู้สมัคร</h2>
-
-        <table>
-            <tr>
-                <th>เบอร์</th>
-                <th>ชื่อพรรค / ผู้สมัคร</th>
-                <th>คะแนนปัจจุบัน</th>
-                <th>จัดการ</th>
-            </tr>
-            {% for cand in candidates %}
-            <tr>
-                <td>{{ cand.candidate_id }}</td>
-                <td>{{ cand.candidate_name }}</td>
-                <td>{{ cand.vote_count }}</td>
-                <td>
-                    <form action="/admin/delete_candidate" method="POST"
-                        onsubmit="return confirm('ยืนยันลบ {{ cand.candidate_name }}?');">
-                        <input type="hidden" name="id" value="{{ cand.candidate_id }}">
-                        <button type="submit" class="btn-del">ลบ</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <div class="form-add">
-            <h3>➕ เพิ่มผู้สมัครใหม่</h3>
-            <form action="/admin/add_candidate" method="POST">
-                <input type="text" name="candidate_name" placeholder="ชื่อพรรค / ชื่อผู้สมัคร" required>
-                <button type="submit" class="btn-add">บันทึก</button>
-            </form>
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+        <div class="nav-links">
+            <a href="/">← กลับหน้าหลัก</a>
+            <a href="/logout">ออกจากระบบ</a>
         </div>
-
-        <hr>
-        <h3>🖼️ จัดการรูปภาพ</h3>
-        <div id="normalize-message" class="message"></div>
-        <button id="normalize-btn" type="button" class="btn-normalize" onclick="normalizeImages()">
-            🔄 Normalize รูปภาพเก่าทั้งหมด
-        </button>
-        <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
-            ปรับปรุงรูปภาพเก่าทั้งหมดให้สอดคล้องกับระบบใหม่ (ลดผลกระทบจากกล้องต่างกัน)
-        </p>
-
-        <hr>
-        <h3>🧠 เทรนโมเดล</h3>
-        <div id="train-message" class="message"></div>
-        {% if train_message %}
-        <div class="message {{ 'success' if train_status == 'success' else 'error' }}" style="display: block;">
-            {{ '✅' if train_status == 'success' else '❌' }} {{ train_message }}
-        </div>
-        {% endif %}
-        <button id="train-btn" type="button" class="btn-train" onclick="retrainModel()">
-            🚀 Train Model Now
-        </button>
-        <form action="/admin/retrain_model_sync" method="POST" style="margin-top: 10px;">
-            <button type="submit" class="btn-train">🛠️ Train Model (Fallback)</button>
-        </form>
-        <p style="color: #7f8c8d; font-size: 12px; margin-top: 5px;">
-            เทรนโมเดลใหม่จากรูปผู้ใช้ทั้งหมด แล้วแสดงค่า accuracy หลังเทรนเสร็จ
-        </p>
-
-        <hr>
-        <h3>⚠️ โซนอันตราย</h3>
-        <form action="/admin/reset_votes" method="POST"
-            onsubmit="return confirm('คำเตือน: คะแนนและสิทธิ์การโหวตของทุกคนจะถูกรีเซ็ต ยืนยันหรือไม่?');">
-            <button type="submit" class="btn-reset" style="background: #c0392b;">🔄
-                รีเซ็ตระบบเลือกตั้งใหม่ทั้งหมด</button>
-        </form>
-
-        <br>
-        <a href="/">← กลับหน้าหลัก</a>
-
-        <script>
-            function normalizeImages() {
-                const btn = document.getElementById('normalize-btn');
-                const messageDiv = document.getElementById('normalize-message');
-                
-                if (!confirm('ยืนยันที่จะ normalize รูปภาพเก่าทั้งหมด?\n\nหมายเหตุ: กระบวนการนี้อาจใช้เวลาสักครู่')) {
-                    return;
-                }
-                
-                btn.disabled = true;
-                btn.textContent = '⏳ กำลังประมวลผล...';
-                messageDiv.style.display = 'none';
-                
-                fetch('/admin/normalize_images', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        messageDiv.className = 'message success';
-                        messageDiv.textContent = `✅ ${data.message} (${data.total_normalized} รูป, เกิดข้อผิดพลาด ${data.total_errors} รูป)`;
-                        messageDiv.style.display = 'block';
-                    } else {
-                        messageDiv.className = 'message error';
-                        messageDiv.textContent = `❌ ${data.message}`;
-                        messageDiv.style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    messageDiv.className = 'message error';
-                    messageDiv.textContent = `❌ เกิดข้อผิดพลาด: ${error.message}`;
-                    messageDiv.style.display = 'block';
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                    btn.textContent = '🔄 Normalize รูปภาพเก่าทั้งหมด';
-                });
-            }
-
-            function retrainModel() {
-                const btn = document.getElementById('train-btn');
-                const messageDiv = document.getElementById('train-message');
-
-                if (!confirm('ยืนยันที่จะเทรนโมเดลใหม่จากข้อมูลทั้งหมด?\n\nหมายเหตุ: อาจใช้เวลาสักครู่')) {
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.textContent = '⏳ กำลังเทรนโมเดล...';
-                messageDiv.style.display = 'none';
-
-                fetch('/admin/retrain_model', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        messageDiv.className = 'message success';
-                        messageDiv.textContent = `✅ ${data.message} (Accuracy: ${data.accuracy_percent})`;
-                        messageDiv.style.display = 'block';
-                    } else {
-                        messageDiv.className = 'message error';
-                        messageDiv.textContent = `❌ ${data.message}`;
-                        messageDiv.style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    messageDiv.className = 'message error';
-                    messageDiv.textContent = `❌ เกิดข้อผิดพลาด: ${error.message}`;
-                    messageDiv.style.display = 'block';
-                })
-                .finally(() => {
-                    btn.disabled = false;
-                    btn.textContent = '🚀 Train Model Now';
-                });
-            }
-        </script>
     </div>
-</body>
 
+    <div class="dashboard-grid">
+        <div class="card">
+            <h2>👥 จัดการผู้สมัคร</h2>
+            <table>
+                <thead>
+                    <tr><th>เบอร์</th><th>ชื่อ</th><th>คะแนน</th><th>จัดการ</th></tr>
+                </thead>
+                <tbody>
+                    {% for cand in candidates %}
+                    <tr>
+                        <td>{{ cand.candidate_id }}</td>
+                        <td>{{ cand.candidate_name }}</td>
+                        <td>{{ cand.vote_count }}</td>
+                        <td>
+                            <form action="/admin/delete_candidate" method="POST" onsubmit="return confirm('ยืนยันลบ {{ cand.candidate_name }}?');">
+                                <input type="hidden" name="id" value="{{ cand.candidate_id }}">
+                                <button type="submit" class="btn btn-danger">ลบ</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div style="margin-top: 30px;">
+                <h3>➕ เพิ่มผู้สมัครใหม่</h3>
+                <form action="/admin/add_candidate" method="POST" class="form-inline">
+                    <input type="text" name="candidate_name" placeholder="ชื่อพรรค / ผู้สมัคร" required>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ เครื่องมือระบบ</h2>
+            <div class="action-group">
+                <div>
+                    <h3>🖼️ จัดการรูปภาพ</h3>
+                    <div id="normalize-message" class="message" style="display:none;"></div>
+                    <button id="normalize-btn" class="btn btn-secondary" onclick="normalizeImages()">🔄 Normalize รูปภาพเก่าทั้งหมด</button>
+                </div>
+                <div>
+                    <h3>🧠 เทรนโมเดล</h3>
+                    <div id="train-message" class="message" style="display:none;"></div>
+                    <button id="train-btn" class="btn btn-primary" onclick="retrainModel()">🚀 Train Model Now</button>
+                    <form action="/admin/retrain_model_sync" method="POST" style="margin: 0;">
+                         <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">🛠️ Train Model (Fallback)</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="card danger-zone">
+            <h3>⚠️ โซนอันตราย</h3>
+            <div class="action-group">
+                <form action="/admin/reset_votes" method="POST" onsubmit="return confirm('การดำเนินการนี้จะลบการโหวตทั้งหมดและรีเซ็ตสถานะของผู้ใช้ทุกคน คุณแน่ใจหรือไม่?');">
+                    <button type="submit" class="btn btn-danger">🔄 รีเซ็ตระบบเลือกตั้งใหม่ทั้งหมด</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Display messages passed via query parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const trainStatus = urlParams.get('train_status');
+            const trainMessage = urlParams.get('train_message');
+
+            if (trainMessage) {
+                const msgContainer = document.getElementById('train-message');
+                msgContainer.textContent = trainMessage;
+                msgContainer.className = 'message ' + (trainStatus === 'success' ? 'success' : 'error');
+                msgContainer.style.display = 'block';
+            }
+        });
+
+        function normalizeImages(){
+            if(!confirm('ยืนยัน normalize รูปภาพทั้งหมด? การดำเนินการนี้อาจใช้เวลาสักครู่')) return;
+            const btn = document.getElementById('normalize-btn');
+            const msg = document.getElementById('normalize-message');
+            btn.disabled = true; btn.innerHTML = '⏳ กำลังประมวลผล...'; msg.style.display = 'none';
+            fetch('/admin/normalize_images',{method:'POST'})
+                .then(r=>r.json())
+                .then(d=>{
+                    if(d.status === 'success'){
+                        msg.className='message success';
+                        msg.textContent = `✅ ${d.message} (สำเร็จ ${d.total_normalized} รูป, ผิดพลาด ${d.total_errors} รูป)`;
+                    } else {
+                        msg.className='message error';
+                        msg.textContent = '❌ ' + d.message;
+                    }
+                    msg.style.display = 'block';
+                })
+                .catch(e => {
+                    msg.className='message error';
+                    msg.textContent = '❌ เกิดข้อผิดพลาด: ' + e.message;
+                    msg.style.display='block';
+                })
+                .finally(() => {
+                    btn.disabled = false; 
+                    btn.innerHTML = '🔄 Normalize รูปภาพเก่าทั้งหมด';
+                });
+        }
+
+        function retrainModel(){
+            if(!confirm('ยืนยันเทรนโมเดลใหม่? การดำเนินการนี้อาจใช้เวลาสักครู่และจะแทนที่โมเดลปัจจุบัน')) return;
+            const btn = document.getElementById('train-btn');
+            const msg = document.getElementById('train-message');
+            btn.disabled = true; btn.innerHTML = '⏳ กำลังเทรนโมเดล...'; msg.style.display = 'none';
+            fetch('/admin/retrain_model',{method:'POST'})
+                .then(r=>r.json())
+                .then(d=>{
+                    if(d.status === 'success'){
+                        msg.className='message success';
+                        msg.textContent = `✅ ${d.message} (Accuracy: ${d.accuracy_percent})`;
+                    } else {
+                        msg.className='message error';
+                        msg.textContent = '❌ ' + d.message;
+                    }
+                    msg.style.display = 'block';
+                })
+                .catch(e => {
+                    msg.className='message error';
+                    msg.textContent = '❌ เกิดข้อผิดพลาด: ' + e.message;
+                    msg.style.display='block';
+                })
+                .finally(() => {
+                    btn.disabled = false; 
+                    btn.innerHTML = '🚀 Train Model Now';
+                });
+        }
+    </script>
+</body>
 </html>
