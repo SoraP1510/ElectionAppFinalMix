@@ -542,7 +542,6 @@ def register_post():
             # กำหนดวิธีการฝึก: Optimizer=adam, Loss Function สำหรับป้ายกำกับที่เป็นตัวเลข, และวัดผลด้วย Accuracy
             model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
             
-            # ฝึกโมเดลด้วยชุดข้อมูลฝึก: 15 รอบ (epochs) โดยแบ่งกลุ่มย่อย (batch_size) 16 รูป
             model.fit(
                 trainX,
                 trainY,
@@ -561,12 +560,12 @@ def register_post():
             with open(f'{model_dir}/label_map.json', 'w') as f:
                 json.dump(label_map, f)
                 
-            print("💾 บันทึกโมเดลเรียบร้อยแล้ว")
+            print("บันทึกโมเดลเรียบร้อยแล้ว")
             loss, acc = model.evaluate(testX, testY, verbose=0)
             training_accuracy = float(acc)
-            print(f"🎯 Training Accuracy: {acc:.4f} ({acc * 100:.2f}%)")
+            print(f"Training Accuracy: {acc:.4f} ({acc * 100:.2f}%)")
         else:
-            print("❌ ไม่พบรูปภาพ")
+            print("ไม่พบรูปภาพ")
         
         target_url = url_for('index', msg='registered')
         
@@ -579,7 +578,7 @@ def register_post():
         })
     
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return jsonify({'status': 'error', 'message': f"เกิดข้อผิดพลาด: {str(e)}"}), 500
 
 @app.route('/', methods=['GET', 'POST'])
@@ -593,7 +592,7 @@ def index():
             try:
                 model = load_face_model(model_path)
             except Exception as model_error:
-                print(f"⚠️ โหลดโมเดลเดิมไม่สำเร็จ, กำลัง re-train: {model_error}")
+                print(f"โหลดโมเดลเดิมไม่สำเร็จ, กำลัง re-train: {model_error}")
                 retrain_result = retrain_face_model_from_existing_images()
                 if not retrain_result.get("success"):
                     return jsonify({
@@ -748,63 +747,6 @@ def normalize_images():
             return jsonify({'status': 'error', 'message': result['message']}), 400
     except Exception as e:
         return jsonify({'status': 'error', 'message': f'เกิดข้อผิดพลาด: {str(e)}'}), 500
-
-@app.route('/admin/retrain_model', methods=['POST'])
-def retrain_model():
-    """Route สำหรับสั่งเทรนโมเดลใหม่ด้วยมือ (ต้องเป็น admin)"""
-    print("➡️ hit /admin/retrain_model", flush=True)
-    write_train_log("➡️ hit /admin/retrain_model")
-    if not session.get('is_admin'):
-        return jsonify({'status': 'error', 'message': 'ต้องเป็น admin'}), 403
-
-    try:
-        print("\n🧠 Admin requested model retraining...", flush=True)
-        write_train_log("🧠 Admin requested model retraining...")
-        result = retrain_face_model_from_existing_images()
-        if result.get('success'):
-            acc = result.get('accuracy')
-            acc_percent = f"{acc * 100:.2f}%" if acc is not None else "N/A"
-            return jsonify({
-                'status': 'success',
-                'message': 'เทรนโมเดลใหม่สำเร็จ',
-                'accuracy': acc,
-                'accuracy_percent': acc_percent
-            })
-        return jsonify({'status': 'error', 'message': result.get('message', 'เทรนโมเดลไม่สำเร็จ')}), 400
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': f'เกิดข้อผิดพลาด: {str(e)}'}), 500
-
-@app.route('/admin/retrain_model_sync', methods=['POST'])
-def retrain_model_sync():
-    """Fallback retrain แบบ form submit (ไม่พึ่ง JavaScript)"""
-    print("➡️ hit /admin/retrain_model_sync", flush=True)
-    write_train_log("➡️ hit /admin/retrain_model_sync")
-    if not session.get('is_admin'):
-        return redirect(url_for('admin_login'))
-
-    try:
-        print("\n🧠 Admin requested model retraining (sync form)...", flush=True)
-        write_train_log("🧠 Admin requested model retraining (sync form)...")
-        result = retrain_face_model_from_existing_images()
-        if result.get('success'):
-            acc = result.get('accuracy')
-            acc_percent = f"{acc * 100:.2f}%" if acc is not None else "N/A"
-            return redirect(url_for(
-                'admin_dashboard',
-                train_status='success',
-                train_message=f'เทรนโมเดลใหม่สำเร็จ (Accuracy: {acc_percent})'
-            ))
-        return redirect(url_for(
-            'admin_dashboard',
-            train_status='error',
-            train_message=result.get('message', 'เทรนโมเดลไม่สำเร็จ')
-        ))
-    except Exception as e:
-        return redirect(url_for(
-            'admin_dashboard',
-            train_status='error',
-            train_message=f'เกิดข้อผิดพลาด: {str(e)}'
-        ))
 
 @app.route('/admin/reset_votes', methods=['POST'])
 def reset_votes():

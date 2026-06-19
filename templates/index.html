@@ -187,15 +187,47 @@
             cameraOverlay.innerText = "กำลังรอการอนุญาตเข้าถึงกล้อง...";
             video.style.opacity = 0;
             navigator.mediaDevices.getUserMedia({ video: true })
+<<<<<<< HEAD
                 .then(stream => { video.srcObject = stream; video.onloadedmetadata = () => { video.play(); cameraOverlay.style.display = 'none'; video.style.opacity = 1; }; })
                 .catch(err => { errorMsg.innerText = "❌ ไม่สามารถเปิดกล้องได้: โปรดอนุญาตการใช้เว็บแคม"; cameraOverlay.style.display = 'flex'; video.style.opacity = 0; });
+=======
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        cameraOverlay.style.display = 'none';
+                        video.style.opacity = 1; 
+                    };
+                })
+                .catch(err => { 
+                    errorMsg.innerText = "ไม่สามารถเปิดกล้องได้: โปรดอนุญาตการใช้เว็บแคม";
+                    cameraOverlay.innerText = "ไม่สามารถเข้าถึงกล้องได้\nโปรดอนุญาตการใช้เว็บแคม";
+                    cameraOverlay.style.display = 'flex';
+                    video.style.opacity = 0;
+                });
+>>>>>>> 1e8e6f2ab151d4eecfdea3ae190455a3afa66864
         }
         initializeCamera();
         window.capture = function() {
             const studentid = studentidInput.value.trim();
+<<<<<<< HEAD
             if (!studentid) { errorMsg.innerText = "⚠️ กรุณากรอกรหัสนักเรียนที่ลงทะเบียน"; return; }
             if (video.readyState < 2 || video.paused || video.ended || video.style.opacity === "0") { errorMsg.innerText = "⚠️ กล้องยังไม่พร้อมใช้งาน หรือยังไม่ได้รับอนุญาต"; return; }
             errorMsg.innerText = "⏳ กำลังตรวจสอบ...";
+=======
+            
+            if (!studentid) { 
+                errorMsg.innerText = "กรุณากรอกรหัสนักเรียนที่ลงทะเบียน"; 
+                return; 
+            }
+            
+            if (video.readyState < 2 || video.paused || video.ended || video.style.opacity === "0") {
+                errorMsg.innerText = "กล้องยังไม่พร้อมใช้งาน หรือยังไม่ได้รับอนุญาต";
+                return;
+            }
+
+            errorMsg.innerText = "กำลังตรวจสอบ...";
+>>>>>>> 1e8e6f2ab151d4eecfdea3ae190455a3afa66864
             const canvas = document.getElementById('canvas');
             canvas.width = video.videoWidth; canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
@@ -205,9 +237,30 @@
                 formData.append('studentid', studentid);
                 formData.append('image', blob, 'face.png');
                 fetch('/', { method: 'POST', body: formData })
+<<<<<<< HEAD
                     .then(res => res.ok ? res.json() : res.json().then(j => { throw new Error(j.message || 'Server error'); }))
                     .then(data => { if (data.status === 'success') { window.location.href = data.redirect_url; } else { errorMsg.innerText = "❌ " + (data.message || 'เกิดข้อผิดพลาด'); } })
                     .catch(err => { errorMsg.innerText = "🔥 ข้อผิดพลาด: " + err.message; });
+=======
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().catch(() => {
+                                throw new Error('Server responded with status: ' + res.status);
+                            });
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            errorMsg.innerText = (data.message || "เกิดข้อผิดพลาดในการตรวจสอบ");
+                        }
+                    })
+                    .catch(err => { 
+                        errorMsg.innerText = "ข้อผิดพลาด: " + err.message; 
+                    });
+>>>>>>> 1e8e6f2ab151d4eecfdea3ae190455a3afa66864
             }, 'image/png');
         }
     </script>
