@@ -1,0 +1,10 @@
+.conda/
+.venv/
+.git/
+.vscode/
+backup/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+Face_Recog_App/model/best model/

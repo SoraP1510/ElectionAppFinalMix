@@ -1,1 +1,8 @@
 /.env
+.conda/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+Face_Recog_App/model/best model/
